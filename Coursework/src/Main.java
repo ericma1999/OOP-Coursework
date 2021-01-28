@@ -8,8 +8,9 @@ public class Main {
         test.add("hello3");
         test.add("hello4");
 
-        test.insert(2, "test insert");
+        StringArray test2 = new StringArray(test);
 
-        test.actualSize();
+        test2.print();
+
     }
 }

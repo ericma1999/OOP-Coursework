@@ -9,6 +9,15 @@ public class StringArray {
 
     public StringArray(StringArray a){
 
+        int inputSize = a.size();
+        String[] newArray = new String[inputSize + 100];
+
+        this.length = inputSize;
+        for (int i = 0; i < inputSize; i++) {
+            newArray[i] = a.get(i);
+        }
+
+        this.stringArray = newArray;
     }
 
     public int size(){
@@ -36,9 +45,8 @@ public class StringArray {
     public void add(String s){
         this.stringArray[this.length] = s;
         this.length += 1;
-        if (this.length == this.stringArray.length){
-            resizeContainerArray(this.stringArray.length + 100);
-        }
+
+        performResizeIfNeeded();
     }
 
     public void insert(int index, String s){
@@ -62,10 +70,14 @@ public class StringArray {
                 this.stringArray = newStringArray;
             }
 
-            if (this.length == this.stringArray.length){
-                resizeContainerArray(this.stringArray.length + 100);
-            }
+            performResizeIfNeeded();
 
+        }
+    }
+
+    private void performResizeIfNeeded(){
+        if (this.length == this.stringArray.length){
+            resizeContainerArray(this.stringArray.length + 100);
         }
     }
 
