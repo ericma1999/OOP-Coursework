@@ -11,8 +11,6 @@ public class StringArray {
 
     }
 
-
-
     public int size(){
         return this.length;
     }
@@ -44,12 +42,31 @@ public class StringArray {
     }
 
     public void insert(int index, String s){
-        if (this.length == 0){
+        if (this.length == 0 || index == this.length - 1){
             this.add(s);
             return;
         }
 
+//        either insert at index 0 or somewhere in the middle
+        if (index >= 0 && index < this.length){
+            if (index == 0){
+                System.arraycopy(this.stringArray, 0, this.stringArray, 1, this.length);
+                this.stringArray[0] = s;
+                this.length += 1;
+            }else{
+                String[] newStringArray = new String[this.stringArray.length + 1];
+                System.arraycopy(this.stringArray, 0, newStringArray, 0, index);
+                System.arraycopy(this.stringArray, index, newStringArray, index+1, this.length - index);
+                newStringArray[index] = s;
+                this.length += 1;
+                this.stringArray = newStringArray;
+            }
 
+            if (this.length == this.stringArray.length){
+                resizeContainerArray(this.stringArray.length + 100);
+            }
+
+        }
     }
 
 
@@ -75,9 +92,6 @@ public class StringArray {
     public void actualSize(){
         System.out.println(this.stringArray.length);
     }
-
-
-
 
 
 }
