@@ -2,6 +2,7 @@ public class StringArray {
 
     private String[] stringArray;
     private int length = 0;
+    private final int increment = 20;
 
     public StringArray(){
         this.stringArray = new String[100];
@@ -10,7 +11,7 @@ public class StringArray {
     public StringArray(StringArray a){
 
         int inputSize = a.size();
-        String[] newArray = new String[inputSize + 100];
+        String[] newArray = new String[inputSize + increment];
 
         this.length = inputSize;
         for (int i = 0; i < inputSize; i++) {
@@ -20,9 +21,7 @@ public class StringArray {
         this.stringArray = newArray;
     }
 
-    public int size(){
-        return this.length;
-    }
+    public int size() {return this.length;}
 
     public boolean isEmpty(){
         return this.length == 0;
@@ -75,9 +74,33 @@ public class StringArray {
         }
     }
 
+    public void remove(int index){
+        if (index < 0 || index > this.length) return;
+
+        if (index == this.length - 1){
+            this.stringArray = new String[increment];
+            this.length = 0;
+        }else if (index == 0){
+            String[] newArray = new String [this.length - 1];
+            System.arraycopy(this.stringArray, 1, newArray, 0, this.length - 1);
+            this.length -= 1;
+            this.stringArray = newArray;
+        }
+        else {
+            String[] newArray = new String [this.length - 1];
+            System.arraycopy(this.stringArray, 0, newArray, 0, index);
+            System.arraycopy(this.stringArray, index + 1, newArray, index, this.length - (index + 1));
+            this.length -= 1;
+            this.stringArray = newArray;
+        }
+
+    }
+
+
+
     private void performResizeIfNeeded(){
         if (this.length == this.stringArray.length){
-            resizeContainerArray(this.stringArray.length + 100);
+            resizeContainerArray(this.stringArray.length + increment);
         }
     }
 

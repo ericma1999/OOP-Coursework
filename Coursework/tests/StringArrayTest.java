@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class StringArrayTest {
@@ -99,6 +101,94 @@ class StringArrayTest {
         assertEquals("test insert", test.get(2));
         assertEquals("hello3", test.get(3));
         assertEquals("hello4", test.get(4));
+    }
+
+    @Test
+    void removeFirstItem(){
+        StringArray test = new StringArray();
+        test.add("hello");
+        test.add("hello2");
+        test.add("hello3");
+        test.add("hello4");
+
+        test.remove(0);
+
+        ArrayList<String> container = new ArrayList<String>();
+        ArrayList<String> checker = new ArrayList<String>();
+        checker.add("hello2");
+        checker.add("hello3");
+        checker.add("hello4");
+
+        for (int i = 0; i < test.size(); i++) {
+            container.add(test.get(i));
+        }
+
+        assertEquals(true, container.equals(checker));
+    }
+    @Test
+    void removeLastItem(){
+        StringArray test = new StringArray();
+        test.add("hello");
+        test.add("hello2");
+        test.add("hello3");
+        test.add("hello4");
+
+        test.remove(3);
+
+        ArrayList<String> container = new ArrayList<String>();
+        ArrayList<String> checker = new ArrayList<String>();
+
+        for (int i = 0; i < test.size(); i++) {
+            container.add(test.get(i));
+        }
+
+        assertEquals(true, container.equals(checker));
+        assertEquals(0, test.size());
+        assertEquals(true, test.isEmpty());
+    }
+
+    @Test
+    void removeMidItems(){
+        StringArray test = new StringArray();
+        test.add("hello");
+        test.add("hello2");
+        test.add("hello3");
+        test.add("hello4");
+
+        test.remove(1);
+        ArrayList<String> container = new ArrayList<String>();
+        ArrayList<String> checker = new ArrayList<String>();
+        checker.add("hello");
+        checker.add("hello3");
+        checker.add("hello4");
+
+        for (int i = 0; i < test.size(); i++) {
+            container.add(test.get(i));
+        }
+
+        assertEquals(true, container.equals(checker));
+        assertEquals(3, test.size());
+        assertEquals(false, test.isEmpty());
+
+
+
+
+
+
+        test.remove(1);
+
+        container = new ArrayList<String>();
+        checker = new ArrayList<String>();
+        checker.add("hello");
+        checker.add("hello4");
+
+        for (int i = 0; i < test.size(); i++) {
+            container.add(test.get(i));
+        }
+
+        assertEquals(true, container.equals(checker));
+        assertEquals(2, test.size());
+        assertEquals(false, test.isEmpty());
     }
 }
 
