@@ -265,5 +265,22 @@ class StringArrayTest {
         test.actualSize();
     }
 
+    @Test
+    void secondConstructor(){
+        StringArray test = new StringArray();
+        test.add("hello");
+        test.add("hello2");
+        test.add("hello3");
+        test.add("hello4");
+
+        StringArray test2 = new StringArray(test);
+
+        assertEquals(4, test2.size());
+        assertEquals("hello",test.get(0));
+        assertEquals("hello2",test.get(1));
+        assertEquals("hello3",test.get(2));
+        assertEquals("hello4",test.get(3));
+    }
+
 }
 

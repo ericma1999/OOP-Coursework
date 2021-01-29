@@ -28,9 +28,7 @@ public class StringArray {
     }
 
     public String get(int index){
-        if (index < 0 || index > this.length){
-            return null;
-        }
+        if (index < 0 || index > this.length) return null;
 
         return this.stringArray[index];
     }
