@@ -97,21 +97,31 @@ public class StringArray {
     }
 
     public boolean contains(String s){
-        String lowered = s.toLowerCase();
+        return this.search(s, false) != -1;
 
-        return this.search(lowered, false);
     }
 
     public boolean containsMatchingCase(String s){
+        return this.search(s, true) != -1;
+    }
+
+    public int indexOf(String s){
+        return this.search(s, false);
+    }
+
+    public int indexOfMatchingCase(String s){
         return this.search(s, true);
     }
 
-    private boolean search(String s, boolean matchingCase){
+    private int search(String s, boolean matchingCase){
+
+        String input = matchingCase ? s : s.toLowerCase();
+
         for (int i = 0; i < this.length; i++) {
             String currentValue = matchingCase ? this.stringArray[i] : this.stringArray[i].toLowerCase();
-            if (s.equals(currentValue)) return true;
+            if (input.equals(currentValue)) return i;
         }
-        return false;
+        return -1;
     }
 
     private void performResizeIfNeeded(){

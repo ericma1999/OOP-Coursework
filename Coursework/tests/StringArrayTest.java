@@ -217,5 +217,33 @@ class StringArrayTest {
         assertEquals(true, test.containsMatchingCase("hello4"));
     }
 
+    @Test
+    void indexOf(){
+        StringArray test = new StringArray();
+        test.add("hello");
+        test.add("hello2");
+        test.add("hello3");
+        test.add("hello4");
+        assertEquals(-1, test.indexOf("hello1"));
+        assertEquals(0, test.indexOf("HELLO"));
+        assertEquals(1, test.indexOf("hello2"));
+        assertEquals(2, test.indexOf("heLLo3"));
+        assertEquals(3, test.indexOf("hello4"));
+    }
+
+    @Test
+    void indexOfMatchingCase(){
+        StringArray test = new StringArray();
+        test.add("hello");
+        test.add("hello2");
+        test.add("hello3");
+        test.add("hello4");
+        assertEquals(-1, test.indexOfMatchingCase("hello1"));
+        assertEquals(-1, test.indexOfMatchingCase("HELLO"));
+        assertEquals(1, test.indexOfMatchingCase("hello2"));
+        assertEquals(-1, test.indexOfMatchingCase("heLLo3"));
+        assertEquals(3, test.indexOfMatchingCase("hello4"));
+    }
+
 }
 
