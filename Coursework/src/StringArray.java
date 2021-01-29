@@ -96,7 +96,23 @@ public class StringArray {
 
     }
 
+    public boolean contains(String s){
+        String lowered = s.toLowerCase();
 
+        return this.search(lowered, false);
+    }
+
+    public boolean containsMatchingCase(String s){
+        return this.search(s, true);
+    }
+
+    private boolean search(String s, boolean matchingCase){
+        for (int i = 0; i < this.length; i++) {
+            String currentValue = matchingCase ? this.stringArray[i] : this.stringArray[i].toLowerCase();
+            if (s.equals(currentValue)) return true;
+        }
+        return false;
+    }
 
     private void performResizeIfNeeded(){
         if (this.length == this.stringArray.length){

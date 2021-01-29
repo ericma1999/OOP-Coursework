@@ -170,11 +170,6 @@ class StringArrayTest {
         assertEquals(3, test.size());
         assertEquals(false, test.isEmpty());
 
-
-
-
-
-
         test.remove(1);
 
         container = new ArrayList<String>();
@@ -190,5 +185,37 @@ class StringArrayTest {
         assertEquals(2, test.size());
         assertEquals(false, test.isEmpty());
     }
+
+
+    @Test
+    void contains(){
+        StringArray test = new StringArray();
+        test.add("hello");
+        test.add("hello2");
+        test.add("hello3");
+        test.add("hello4");
+
+        assertEquals(false, test.contains("hello1"));
+        assertEquals(true, test.contains("HELLO"));
+        assertEquals(true, test.contains("hEllo2"));
+        assertEquals(true, test.contains("heLLo3"));
+        assertEquals(true, test.contains("hEllO4"));
+    }
+
+    @Test
+    void containsMatchingCase(){
+        StringArray test = new StringArray();
+        test.add("hello");
+        test.add("hello2");
+        test.add("hello3");
+        test.add("hello4");
+
+        assertEquals(false, test.containsMatchingCase("hello1"));
+        assertEquals(false, test.containsMatchingCase("HELLO"));
+        assertEquals(true, test.containsMatchingCase("hello2"));
+        assertEquals(false, test.containsMatchingCase("heLLo3"));
+        assertEquals(true, test.containsMatchingCase("hello4"));
+    }
+
 }
 
