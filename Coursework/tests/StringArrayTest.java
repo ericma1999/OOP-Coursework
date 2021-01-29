@@ -245,5 +245,25 @@ class StringArrayTest {
         assertEquals(3, test.indexOfMatchingCase("hello4"));
     }
 
+    @Test
+    void testArrayResizing(){
+        StringArray test = new StringArray();
+
+        for (int i = 0; i < 21; i++) {
+            test.add("hello".concat(String.valueOf(i)));
+            test.actualSize();
+        }
+
+        assertEquals(21, test.size());
+
+        assertEquals("hello20", test.get(20));
+
+        test.add("another");
+
+        assertEquals(22, test.size());
+
+        test.actualSize();
+    }
+
 }
 

@@ -5,7 +5,7 @@ public class StringArray {
     private final int increment = 20;
 
     public StringArray(){
-        this.stringArray = new String[100];
+        this.stringArray = new String[increment];
     }
 
     public StringArray(StringArray a){
