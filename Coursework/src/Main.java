@@ -22,14 +22,16 @@ public class Main {
 //        {
 //            System.out.println(i);
 //        }
-        StringArray test = new StringArray();
-        test.add("hello");
-        test.add("hello2");
-        test.add("hello3");
-        test.add("hello4");
+//        StringArray test = new StringArray();
+//        test.add("hello");
+//        test.add("hello2");
+//        test.add("hello3");
+//        test.add("hello4");
+//
+//        test.remove(3);
+//        System.out.println(test.get(2));;
 
-        test.remove(3);
-        System.out.println(test.get(2));;
+        Dictionary test = new Dictionary("words");
 
 
 
