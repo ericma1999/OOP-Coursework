@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Menu {
     enum Options{
         InputFile(1), InputText(2), SetDictionary(3), Exit(4), Invalid(5);
@@ -31,14 +33,28 @@ public class Menu {
         System.out.printf("%d.) Exit/Close application\n", Options.Exit.getValue());
     }
 
-    public boolean handleSelection(int input){
+    private void handleFile(String fileName, Dictionary dictionary){
+        FileInput file = new FileInput(fileName);
+        while (file.hasNextLine()){
+            handleText(file.nextLine(), dictionary);
+        }
+    }
+
+    private StringArray handleText(String text, Dictionary dictionary){
+        return dictionary.getExcludedWordsFromString(text);
+    }
+
+    public boolean handleSelection(int input, Dictionary dictionary){
+        Scanner in = new Scanner(System.in);
         Options value = Options.getOptionFromInteger(input);
         switch (value){
             case InputFile:
-                System.out.println("selected inputFile");
+                String fileName = in.nextLine();
+                handleFile(fileName, dictionary);
                 break;
             case InputText:
-                System.out.println("selected inputText");
+                String text = in.nextLine();
+                StringArray.list(handleText(text, dictionary));
                 break;
             case SetDictionary:
                 System.out.println("selected setdictionary");

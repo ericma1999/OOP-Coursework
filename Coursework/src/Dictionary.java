@@ -26,10 +26,10 @@ public class Dictionary {
         StringArray excluded = new StringArray();
 
         for(String word: this.sanitiseString(input)){
-            if(this.search(word)){
-                included.add(word);
-            }else{
-                excluded.add(word);
+            if(this.search(word) && !included.contains(word)){
+                    included.add(word);
+            }else if (!this.search(word) && !excluded.contains(word)){
+                    excluded.add(word);
             }
 
         }

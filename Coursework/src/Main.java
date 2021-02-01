@@ -5,6 +5,7 @@ public class Main {
     public static void main(String[] args) {
         Menu menu = new Menu();
         Scanner in = new Scanner(System.in);
+        Dictionary dictionary = new Dictionary("words");
 
         while(true){
             menu.displayMenu();
@@ -17,17 +18,9 @@ public class Main {
                 continue;
             }
 
-            if (!menu.handleSelection(option)){
+            if (!menu.handleSelection(option, dictionary)){
                 break;
             }
         }
-
-//
-//        Dictionary dictionary = new Dictionary("words");
-//
-//        Tuple wordsInDictionary = dictionary.findWordsInString("hello my name is gandee");
-//
-//        wordsInDictionary.getIncluded().print();
-
     }
 }

@@ -4,6 +4,13 @@ public class StringArray {
     private int length = 0;
     private final int increment = 20;
 
+    static void list(StringArray words){
+        for (int i = 0; i < words.size(); i++) {
+            System.out.println(words.get(i));
+        }
+    }
+
+
     public StringArray(){
         this.stringArray = new String[increment];
     }
@@ -96,7 +103,6 @@ public class StringArray {
 
     public boolean contains(String s){
         return this.search(s, false) != -1;
-
     }
 
     public boolean containsMatchingCase(String s){
@@ -141,6 +147,16 @@ public class StringArray {
         this.stringArray = newArray;
     }
 
+    @Override
+    public String toString() {
+        String output = "";
+        for (int i = 0; i < this.length; i++) {
+            output = output.concat(this.stringArray[i] + " ");
+        }
+
+        return output;
+    }
+
 
     public void print(){
         for (int i = 0; i < this.length; i++) {
@@ -151,6 +167,4 @@ public class StringArray {
     public void actualSize(){
         System.out.println(this.stringArray.length);
     }
-
-
 }
