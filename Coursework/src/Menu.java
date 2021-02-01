@@ -36,7 +36,7 @@ public class Menu {
     private void handleFile(String fileName, Dictionary dictionary){
         FileInput file = new FileInput(fileName);
         while (file.hasNextLine()){
-            handleText(file.nextLine(), dictionary);
+            StringArray.list(handleText(file.nextLine(), dictionary));
         }
     }
 

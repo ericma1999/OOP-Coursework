@@ -157,7 +157,6 @@ public class StringArray {
         return output;
     }
 
-
     public void print(){
         for (int i = 0; i < this.length; i++) {
             System.out.println(this.stringArray[i]);
