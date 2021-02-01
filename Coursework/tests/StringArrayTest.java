@@ -94,6 +94,8 @@ class StringArrayTest {
         test.add("hello3");
         test.add("hello4");
 
+
+//        insert in middle test
         test.insert(2, "test insert");
 
         assertEquals("hello", test.get(0));
@@ -101,6 +103,27 @@ class StringArrayTest {
         assertEquals("test insert", test.get(2));
         assertEquals("hello3", test.get(3));
         assertEquals("hello4", test.get(4));
+        assertEquals(5, test.size());
+
+//        insert at end test
+
+        test.insert(4, "insert at end");
+
+        assertEquals("hello3", test.get(3));
+        assertEquals("insert at end", test.get(4));
+        assertEquals("hello4", test.get(5));
+        assertEquals(6, test.size());
+
+        test = new StringArray();
+        test.insert(100, "hello");
+        assertEquals(true, test.isEmpty());
+        assertEquals(0, test.size());
+
+
+        test.insert(0, "hello");
+        assertEquals(false, test.isEmpty());
+        assertEquals(1, test.size());
+
     }
 
     @Test

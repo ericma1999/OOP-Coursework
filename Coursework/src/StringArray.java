@@ -47,7 +47,7 @@ public class StringArray {
     }
 
     public void insert(int index, String s){
-        if (this.length == 0 || index == this.length - 1){
+        if (this.length == 0 && index == 0){
             this.add(s);
             return;
         }
