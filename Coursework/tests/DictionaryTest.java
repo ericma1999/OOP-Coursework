@@ -21,13 +21,21 @@ class DictionaryTest {
     @Test()
     void findWordsInString()
     {
-        StringArray wordsInDictionary = newDictionary.findWordsInString("hello my name is gandee");
-        String testString = "";
-        for (int i = 0; i < wordsInDictionary.size(); i++) {
-            testString += wordsInDictionary.get(i) + " ";
-        }
-        assertEquals("hello my name is ", testString);
+        Tuple wordsInDictionary = newDictionary.findWordsInString("hello my name is gandee");
+        String testIncluded = "";
+        String testExcluded = "";
 
+        for (int i = 0; i < wordsInDictionary.getIncluded().size(); i++) {
+            testIncluded += wordsInDictionary.getIncluded().get(i) + " ";
+        }
+
+        for (int i = 0; i < wordsInDictionary.getExcluded().size(); i++) {
+            testExcluded += wordsInDictionary.getExcluded().get(i) + " ";
+        }
+
+
+        assertEquals("hello my name is ", testIncluded);
+        assertEquals("gandee ", testExcluded);
     }
 
 }

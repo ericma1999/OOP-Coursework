@@ -13,16 +13,27 @@ public class Dictionary {
         return this.words.contains(word);
     }
 
-    public StringArray findWordsInString(String input){
+    public StringArray getIncludedWordsFromString(String input){
+        return this.findWordsInString(input).getIncluded();
+    }
 
-        StringArray output = new StringArray();
+    public StringArray getExcludedWordsFromString(String input){
+        return this.findWordsInString(input).getExcluded();
+    }
+
+    public Tuple findWordsInString(String input){
+        StringArray included = new StringArray();
+        StringArray excluded = new StringArray();
 
         for(String word: this.sanitiseString(input)){
             if(this.search(word)){
-                output.add(word);
+                included.add(word);
+            }else{
+                excluded.add(word);
             }
+
         }
-        return output;
+        return new Tuple(included, excluded);
     }
 
     private String[] sanitiseString(String input){
