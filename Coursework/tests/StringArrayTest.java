@@ -274,7 +274,6 @@ class StringArrayTest {
 
         for (int i = 0; i < 21; i++) {
             test.add("hello".concat(String.valueOf(i)));
-            test.actualSize();
         }
 
         assertEquals(21, test.size());
@@ -285,7 +284,6 @@ class StringArrayTest {
 
         assertEquals(22, test.size());
 
-        test.actualSize();
     }
 
     @Test

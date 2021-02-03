@@ -5,17 +5,14 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DictionaryTest {
 
-    Dictionary newDictionary;
-    @BeforeEach
-    void setup(){
-        newDictionary = new Dictionary("words");
-    }
-
+    Dictionary newDictionary = new Dictionary("test");
 
     @Test
     void constructorTest(){
-        assertEquals(true, newDictionary.search("A"));
+        assertTrue(newDictionary.search("f"));
     }
+
+
 
 
 //    @Test()

@@ -51,7 +51,6 @@ public class StringArray {
             this.add(s);
             return;
         }
-
 //        either insert at index 0 or somewhere in the middle
         if (index >= 0 && index < this.length){
             if (index == 0){
@@ -110,10 +109,6 @@ public class StringArray {
         return this.search(s, true);
     }
 
-    public void uniqueAdd(StringArray input){
-//       return;
-    }
-
     private int search(String s, boolean matchingCase){
 
         String input = matchingCase ? s : s.toLowerCase();
@@ -142,14 +137,14 @@ public class StringArray {
         cloneIntoNewArray(newArray);
         this.stringArray = newArray;
     }
-
+//
     public void print(){
         for (int i = 0; i < this.length; i++) {
             System.out.println(this.stringArray[i]);
         }
     }
-
-    public void actualSize(){
-        System.out.println(this.stringArray.length);
-    }
+//
+//    public void actualSize(){
+//        System.out.println(this.stringArray.length);
+//    }
 }
