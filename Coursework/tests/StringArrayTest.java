@@ -99,183 +99,80 @@ class StringArrayTest {
         testArray.insert(100, "hello");
         assertEquals(0, testArray.size());
     }
-    
 
     @Test
-    void removeFirstItem(){
-        StringArray test = new StringArray();
-        test.add("hello");
-        test.add("hello2");
-        test.add("hello3");
-        test.add("hello4");
-
-        test.remove(0);
-
-        ArrayList<String> container = new ArrayList<String>();
-        ArrayList<String> checker = new ArrayList<String>();
-        checker.add("hello2");
-        checker.add("hello3");
-        checker.add("hello4");
-
-        for (int i = 0; i < test.size(); i++) {
-            container.add(test.get(i));
-        }
-
-        assertEquals(true, container.equals(checker));
+    void removeFirst(){
+        testArray.remove(0);
+        assertEquals(2, testArray.size());
+        assertEquals("hello2", testArray.get(0));
     }
+
     @Test
-    void removeLastItem(){
-        StringArray test = new StringArray();
-        test.add("hello");
-        test.add("hello2");
-        test.add("hello3");
-        test.add("hello4");
+    void removeInvalidIndex(){
+        testArray.remove(5);
+        assertEquals(3, testArray.size());
+    }
 
-        test.remove(3);
-
-        ArrayList<String> container = new ArrayList<String>();
-        ArrayList<String> checker = new ArrayList<String>();
-
-        for (int i = 0; i < test.size(); i++) {
-            container.add(test.get(i));
-        }
-
-        assertEquals(true, container.equals(checker));
-        assertEquals(0, test.size());
-        assertEquals(true, test.isEmpty());
+    @Test
+    void removeLastStringReference(){
+        testArray.remove(2);
+        assertTrue(testArray.isEmpty());
     }
 
     @Test
     void removeMidItems(){
-        StringArray test = new StringArray();
-        test.add("hello");
-        test.add("hello2");
-        test.add("hello3");
-        test.add("hello4");
+        testArray.add("hello4");
 
-        test.remove(1);
-        ArrayList<String> container = new ArrayList<String>();
-        ArrayList<String> checker = new ArrayList<String>();
-        checker.add("hello");
-        checker.add("hello3");
-        checker.add("hello4");
-
-        for (int i = 0; i < test.size(); i++) {
-            container.add(test.get(i));
-        }
-
-        assertEquals(true, container.equals(checker));
-        assertEquals(3, test.size());
-        assertEquals(false, test.isEmpty());
-
-        test.remove(1);
-
-        container = new ArrayList<String>();
-        checker = new ArrayList<String>();
-        checker.add("hello");
-        checker.add("hello4");
-
-        for (int i = 0; i < test.size(); i++) {
-            container.add(test.get(i));
-        }
-
-        assertEquals(true, container.equals(checker));
-        assertEquals(2, test.size());
-        assertEquals(false, test.isEmpty());
+        testArray.remove(2);
+        assertEquals("hello4", testArray.get(2));
+        assertEquals(3, testArray.size());
     }
 
-
     @Test
-    void contains(){
-        StringArray test = new StringArray();
-        test.add("hello");
-        test.add("hello2");
-        test.add("hello3");
-        test.add("hello4");
-
-        assertEquals(false, test.contains("hello1"));
-        assertEquals(true, test.contains("HELLO"));
-        assertEquals(true, test.contains("hEllo2"));
-        assertEquals(true, test.contains("heLLo3"));
-        assertEquals(true, test.contains("hEllO4"));
+    void testContains(){
+        assertTrue(testArray.contains("hello"));
+        assertFalse(testArray.contains("hello999"));
     }
 
     @Test
     void containsMatchingCase(){
-        StringArray test = new StringArray();
-        test.add("hello");
-        test.add("hello2");
-        test.add("hello3");
-        test.add("hello4");
-
-        assertEquals(false, test.containsMatchingCase("hello1"));
-        assertEquals(false, test.containsMatchingCase("HELLO"));
-        assertEquals(true, test.containsMatchingCase("hello2"));
-        assertEquals(false, test.containsMatchingCase("heLLo3"));
-        assertEquals(true, test.containsMatchingCase("hello4"));
+        assertTrue( testArray.containsMatchingCase("hello"));
+        assertFalse(testArray.containsMatchingCase("HELLO"));
     }
 
     @Test
     void indexOf(){
-        StringArray test = new StringArray();
-        test.add("hello");
-        test.add("hello2");
-        test.add("hello3");
-        test.add("hello4");
-        assertEquals(-1, test.indexOf("hello1"));
-        assertEquals(0, test.indexOf("HELLO"));
-        assertEquals(1, test.indexOf("hello2"));
-        assertEquals(2, test.indexOf("heLLo3"));
-        assertEquals(3, test.indexOf("hello4"));
+        assertEquals(1, testArray.indexOf("hello2"));
+        assertEquals(-1, testArray.indexOf("hello555"));
     }
 
     @Test
     void indexOfMatchingCase(){
-        StringArray test = new StringArray();
-        test.add("hello");
-        test.add("hello2");
-        test.add("hello3");
-        test.add("hello4");
-        assertEquals(-1, test.indexOfMatchingCase("hello1"));
-        assertEquals(-1, test.indexOfMatchingCase("HELLO"));
-        assertEquals(1, test.indexOfMatchingCase("hello2"));
-        assertEquals(-1, test.indexOfMatchingCase("heLLo3"));
-        assertEquals(3, test.indexOfMatchingCase("hello4"));
+        assertEquals(0, testArray.indexOfMatchingCase("hello"));
+        assertEquals(-1, testArray.indexOfMatchingCase("HELLO"));
     }
 
     @Test
     void testArrayResizing(){
         StringArray test = new StringArray();
 
-        for (int i = 0; i < 21; i++) {
+        for (int i = 0; i < 100; i++) {
             test.add("hello".concat(String.valueOf(i)));
         }
 
-        assertEquals(21, test.size());
-
-        assertEquals("hello20", test.get(20));
+        assertEquals(100, test.size());
 
         test.add("another");
 
-        assertEquals(22, test.size());
-
+        assertEquals(101, test.size());
     }
 
     @Test
     void secondConstructor(){
-        StringArray test = new StringArray();
-        test.add("hello");
-        test.add("hello2");
-        test.add("hello3");
-        test.add("hello4");
+        StringArray testArray2 = new StringArray(testArray);
 
-        StringArray test2 = new StringArray(test);
+        assertEquals(3, testArray2.size());
 
-        assertEquals(4, test2.size());
-        assertEquals("hello",test.get(0));
-        assertEquals("hello2",test.get(1));
-        assertEquals("hello3",test.get(2));
-        assertEquals("hello4",test.get(3));
     }
 
 }
