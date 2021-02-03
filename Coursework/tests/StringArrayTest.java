@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -6,125 +7,99 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StringArrayTest {
 
-    @Test
-    void defaultConstructor(){
-        StringArray test = new StringArray();
+    StringArray testArray;
 
-        assertEquals(test.size(),0);
-        assertEquals(true, test.isEmpty());
-    }
-
-    @Test
-    void size() {
-        StringArray test = new StringArray();
-        assertEquals(test.size(),0);
-
-        test.add("hello");
-        test.add("hello2");
-
-        assertEquals(2, test.size());
+    @BeforeEach
+    void setup(){
+        testArray = new StringArray();
+        testArray.add("hello");
+        testArray.add("hello2");
+        testArray.add("hello3");
 
     }
 
     @Test
-    void isEmpty() {
+    void testAddandSize() {
+        testArray.add("hello4");
+        assertEquals(4, testArray.size());
+    }
 
-        StringArray test = new StringArray();
+    @Test
+    void testAddingNull(){
+        testArray.add(null);
+        assertEquals(4, testArray.size());
+    }
 
-        assertEquals(true, test.isEmpty());
+    @Test
+    void testRemoveandEmptyProperty() {
 
-        test.add("hello");
-        assertEquals(false, test.isEmpty());
+        assertFalse(testArray.isEmpty());
 
+        testArray.remove(0);
+        testArray.remove(0);
+        testArray.remove(0);
+
+        assertTrue(testArray.isEmpty());
 
     }
 
     @Test
-    void get() {
-        StringArray test = new StringArray();
-
-        test.add("hello");
-        test.add("hello2");
-        test.add(null);
-
-        assertEquals(null, test.get(-1));
-        assertEquals(null, test.get(3));
-        assertEquals("hello2", test.get(1));
-    }
-
-    @Test
-    void set() {
-
-        StringArray test = new StringArray();
-
-        test.add("hello");
-        test.add("hello2");
-        test.add(null);
-
-        test.set(2, "hello3");
-        assertEquals("hello3", test.get(2));
-
-        test.set(3, "should be nothing");
-
-        assertEquals(null, test.get(3));
+    void getWrongIndex() {
+        assertNull(testArray.get(-1));
+        assertNull( testArray.get(3));
 
     }
 
     @Test
-    void add() {
-        StringArray test = new StringArray();
-
-        test.add("hello");
-        test.add("hello2");
-        test.add(null);
-        test.add("hello3");
-
-        assertEquals("hello", test.get(0));
-        assertEquals("hello2", test.get(1));
-        assertEquals(null, test.get(2));
-        assertEquals("hello3", test.get(3));
+    void getCorrectIndex(){
+        assertEquals("hello2", testArray.get(1));
     }
 
     @Test
-    void insert(){
-        StringArray test = new StringArray();
-
-        test.add("hello");
-        test.add("hello2");
-        test.add("hello3");
-        test.add("hello4");
-
-
-//        insert in middle test
-        test.insert(2, "test insert");
-
-        assertEquals("hello", test.get(0));
-        assertEquals("hello2", test.get(1));
-        assertEquals("test insert", test.get(2));
-        assertEquals("hello3", test.get(3));
-        assertEquals("hello4", test.get(4));
-        assertEquals(5, test.size());
-
-//        insert at end test
-
-        test.insert(4, "insert at end");
-
-        assertEquals("hello3", test.get(3));
-        assertEquals("insert at end", test.get(4));
-        assertEquals("hello4", test.get(5));
-        assertEquals(6, test.size());
-
-        test = new StringArray();
-        test.insert(100, "hello");
-        assertEquals(true, test.isEmpty());
-        assertEquals(0, test.size());
-
-
-        test.insert(0, "hello");
-        assertEquals(false, test.isEmpty());
-        assertEquals(1, test.size());
-
+    void setCorrectIndex(){
+        testArray.set(2, "set item");
+        assertEquals("set item", testArray.get(2));
     }
+
+    @Test
+    void setWrongIndex(){
+        testArray.set(3, "wrong index");
+        assertNull(testArray.get(3));
+    }
+
+    @Test
+    void setAtIndexValueNull(){
+        testArray.add(null);
+        testArray.set(3, "not null");
+        assertEquals("not null", testArray.get(3));
+    }
+
+    @Test
+    void insertInMiddle(){
+        testArray.insert(1, "insert middle");
+        assertEquals("insert middle", testArray.get(1));
+        assertEquals("hello2", testArray.get(2));
+    }
+
+    @Test
+    void insertAtEnd(){
+        testArray.insert(2, "insert at end");
+        assertEquals("insert at end", testArray.get(2));
+        assertEquals("hello3", testArray.get(testArray.size() - 1));
+    }
+
+    @Test
+    void insertWhenEmpty(){
+        testArray = new StringArray();
+        testArray.insert(0, "hello");
+        assertEquals(1, testArray.size());
+
+        testArray = new StringArray();
+
+        testArray.insert(100, "hello");
+        assertEquals(0, testArray.size());
+    }
+    
 
     @Test
     void removeFirstItem(){
