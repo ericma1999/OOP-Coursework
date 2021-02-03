@@ -2,15 +2,16 @@ public class StringArray {
 
     private String[] stringArray;
     private int length = 0;
-    private final int increment = 20;
+    private final int initialSize = 100;
 
     public StringArray(){
-        this.stringArray = new String[increment];
+        this.stringArray = new String[initialSize];
     }
 
     public StringArray(StringArray a){
 
         int inputSize = a.size();
+        int increment = ((inputSize + 99) / 100 ) * 100 - inputSize;
         String[] newArray = new String[inputSize + increment];
 
         this.length = inputSize;
@@ -75,7 +76,7 @@ public class StringArray {
         if (index < 0 || index > this.length) return;
 
         if (index == this.length - 1){
-            this.stringArray = new String[increment];
+            this.stringArray = new String[initialSize];
             this.length = 0;
         }else if (index == 0){
             String[] newArray = new String [this.length - 1];
@@ -122,7 +123,8 @@ public class StringArray {
 
     private void performResizeIfNeeded(){
         if (this.length == this.stringArray.length){
-            resizeContainerArray(this.stringArray.length + increment);
+
+            resizeContainerArray(this.stringArray.length + initialSize);
         }
     }
 
