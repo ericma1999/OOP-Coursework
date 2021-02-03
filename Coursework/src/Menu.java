@@ -1,6 +1,8 @@
-import java.util.Scanner;
-
 public class Menu {
+
+    private Controller controller;
+
+
     enum Options{
         InputFile(1), InputText(2), SetDictionary(3), Exit(4), Invalid(5);
 
@@ -25,6 +27,10 @@ public class Menu {
         }
     }
 
+    public void setController(Controller controller){
+        this.controller = controller;
+    }
+
     public void displayMenu(){
         System.out.println("Coursework Dictionary Application");
         System.out.printf("%d.) Read a file\n", Options.InputFile.getValue());
@@ -33,28 +39,36 @@ public class Menu {
         System.out.printf("%d.) Exit/Close application\n", Options.Exit.getValue());
     }
 
-    private void handleFile(String fileName, Dictionary dictionary){
-        FileInput file = new FileInput(fileName);
-        while (file.hasNextLine()){
-            StringArray.list(handleText(file.nextLine(), dictionary));
+    private void printStringArray(StringArray words){
+        for (int i = 0; i < words.size(); i++) {
+            System.out.println(words.get(i));
         }
     }
 
-    private StringArray handleText(String text, Dictionary dictionary){
-        return dictionary.getExcludedWordsFromString(text);
+    private void handleFile(){
+        System.out.print("Please input your filename: ");
+        Input input = new Input();
+        String fileName = input.nextLine();
+        StringArray excludedWords = controller.getExcludedWordsFromFile(fileName);
+        printStringArray(excludedWords);
+    }
+
+    private void handleText(){
+        System.out.print("Please input your text: ");
+        Input input = new Input();
+        String text = input.nextLine();
+        StringArray excludedWords = controller.getExcludedWordsFromString(text);
+        printStringArray(excludedWords);
     }
 
     public boolean handleSelection(int input, Dictionary dictionary){
-        Scanner in = new Scanner(System.in);
         Options value = Options.getOptionFromInteger(input);
         switch (value){
             case InputFile:
-                String fileName = in.nextLine();
-                handleFile(fileName, dictionary);
+                handleFile();
                 break;
             case InputText:
-                String text = in.nextLine();
-                StringArray.list(handleText(text, dictionary));
+                handleText();
                 break;
             case SetDictionary:
                 System.out.println("selected setdictionary");
@@ -67,8 +81,8 @@ public class Menu {
                 return false;
             default:
                 break;
-
         }
+
         return true;
     }
 

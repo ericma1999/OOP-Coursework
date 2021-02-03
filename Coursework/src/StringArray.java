@@ -4,13 +4,6 @@ public class StringArray {
     private int length = 0;
     private final int increment = 20;
 
-    static void list(StringArray words){
-        for (int i = 0; i < words.size(); i++) {
-            System.out.println(words.get(i));
-        }
-    }
-
-
     public StringArray(){
         this.stringArray = new String[increment];
     }
@@ -117,6 +110,10 @@ public class StringArray {
         return this.search(s, true);
     }
 
+    public void uniqueAdd(StringArray input){
+//       return;
+    }
+
     private int search(String s, boolean matchingCase){
 
         String input = matchingCase ? s : s.toLowerCase();
@@ -134,7 +131,6 @@ public class StringArray {
         }
     }
 
-
     private void cloneIntoNewArray(String[] newArray){
         for (int i = 0; i < this.length; i++) {
             newArray[i] = this.stringArray[i];
@@ -145,16 +141,6 @@ public class StringArray {
         String[] newArray = new String[newSize];
         cloneIntoNewArray(newArray);
         this.stringArray = newArray;
-    }
-
-    @Override
-    public String toString() {
-        String output = "";
-        for (int i = 0; i < this.length; i++) {
-            output = output.concat(this.stringArray[i] + " ");
-        }
-
-        return output;
     }
 
     public void print(){
