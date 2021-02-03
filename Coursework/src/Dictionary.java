@@ -44,8 +44,6 @@ public class Dictionary extends StringArray{
             this.add(file.nextLine().toLowerCase());
         }
         file.close();
-
-        this.print();
     }
 
 }

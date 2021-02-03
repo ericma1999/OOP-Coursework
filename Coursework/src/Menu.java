@@ -70,16 +70,26 @@ public class Menu {
         System.out.print("Please input your filename: ");
         String fileName = input.nextLine();
         StringArray excludedWords = controller.getExcludedWordsFromFile(fileName);
-        System.out.println("\nWords not in dictionary from the file\n");
-        printStringArray(excludedWords);
+
+        if(excludedWords.size() > 0){
+            System.out.println("\nWords not in dictionary from the file\n");
+            printStringArray(excludedWords);
+        }else{
+            System.out.println("\nAll words were in the dictionary\n");
+        }
     }
 
     private void handleText(){
         System.out.print("Please input your text: ");
         String text = input.nextLine();
         StringArray excludedWords = controller.getExcludedWordsFromString(text);
-        System.out.println("\nWords not in dictionary from the string inputted\n");
-        printStringArray(excludedWords);
+
+        if (excludedWords.size() > 0){
+            System.out.println("\nWords not in dictionary from the string inputted\n");
+            printStringArray(excludedWords);
+        }else{
+            System.out.println("\nAll words were in the dictionary\n");
+        }
     }
 
     private boolean handleSelection(int input){
