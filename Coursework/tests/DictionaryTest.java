@@ -8,7 +8,7 @@ class DictionaryTest {
     Dictionary newDictionary;
     @BeforeEach
     void setup(){
-        newDictionary = new Dictionary("test");
+        newDictionary = new Dictionary("words");
     }
 
 

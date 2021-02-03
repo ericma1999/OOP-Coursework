@@ -1,27 +1,21 @@
-public class Dictionary {
+public class Dictionary extends StringArray{
 
-    private StringArray words;
-
-    public Dictionary(String source){
-        this.words = new StringArray();
-        this.readFileContents(source);
+    public Dictionary(String dictionarySource){
+        super();
+        this.readFileContents(dictionarySource);
     }
 
-//    assume file is in correct order of words.txt
-
+//    search can utilise binary search instead of normal loop since its in order
     public boolean search(String word){
-        return this.words.contains(word);
+        return this.contains(word);
     }
 
-
-
+    //    assume file is in correct order of words.txt
     private void readFileContents(String source){
         FileInput file = new FileInput(source);
         while(file.hasNextLine()){
-
-            this.words.add(file.nextLine());
+            this.add(file.nextLine());
         }
-
         file.close();
     }
 
