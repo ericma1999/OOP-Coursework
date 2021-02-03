@@ -30,9 +30,9 @@ public class Controller {
 
         while (file.hasNext()){
             String word = file.next();
-            if (dictionary.search(word) && !included.contains(word)){
+            if (dictionary.contains(word) && !included.contains(word)){
                 included.add(word);
-            }else if (!dictionary.search(word) && !excluded.contains(word)){
+            }else if (!dictionary.contains(word) && !excluded.contains(word)){
                 excluded.add(word);
             }
         }
@@ -44,9 +44,9 @@ public class Controller {
         StringArray excluded = new StringArray();
 
         for(String word: this.sanitiseString(input)){
-            if(dictionary.search(word) && !included.contains(word)){
+            if(dictionary.contains(word) && !included.contains(word)){
                 included.add(word);
-            }else if (!dictionary.search(word) && !excluded.contains(word)){
+            }else if (!dictionary.contains(word) && !excluded.contains(word)){
                 excluded.add(word);
             }
         }

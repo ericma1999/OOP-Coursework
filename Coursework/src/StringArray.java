@@ -95,11 +95,11 @@ public class StringArray {
     }
 
     public boolean contains(String s){
-        return this.search(s, false) != -1;
+        return this.indexOf(s) != -1;
     }
 
     public boolean containsMatchingCase(String s){
-        return this.search(s, true) != -1;
+        return this.indexOfMatchingCase(s) != -1;
     }
 
     public int indexOf(String s){

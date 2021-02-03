@@ -6,8 +6,9 @@ public class Dictionary extends StringArray{
     }
 
 //    search can utilise binary search instead of normal loop since its in alphabetical order
-    public boolean search(String word){
-        return this.binarySearch(word) != -1;
+    @Override
+    public int indexOf(String s){
+        return this.binarySearch(s);
     }
 
     private int binarySearch(String word){
