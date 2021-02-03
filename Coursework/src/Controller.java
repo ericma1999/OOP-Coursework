@@ -22,22 +22,7 @@ public class Controller {
     public StringArray getIncludedWordsFromString(String text) {return findWordsInString(text).getIncluded();}
 
     public void start(){
-        Scanner in = new Scanner(System.in);
-        while(true){
-            view.displayMenu();
-            String userInput = in.next();
-            int option;
-            try{
-                option = Integer.parseInt(userInput);
-            }catch(NumberFormatException e){
-                System.out.println("You have input a text instead of a valid integer option");
-                continue;
-            }
-
-            if (!view.handleSelection(option, dictionary)){
-                break;
-            }
-        }
+        view.initialiseMenu();
     }
 
     private Tuple findWordsInFile(String fileName){
@@ -74,13 +59,5 @@ public class Controller {
     private String[] sanitiseString(String input){
         return input.replaceAll("\\W", " ").split("\\s+");
     }
-
-
-
-
-
-
-
-
 
 }

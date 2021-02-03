@@ -1,7 +1,9 @@
+import java.util.Scanner;
+
 public class Menu {
 
     private Controller controller;
-
+    private Input input = new Input();
 
     enum Options{
         InputFile(1), InputText(2), SetDictionary(3), Exit(4), Invalid(5);
@@ -31,8 +33,26 @@ public class Menu {
         this.controller = controller;
     }
 
-    public void displayMenu(){
-        System.out.println("Coursework Dictionary Application");
+    public void initialiseMenu(){
+        while(true){
+            this.displayMenu();
+            String userInput = this.input.nextLine();
+            int option;
+            try{
+                option = Integer.parseInt(userInput);
+            }catch(NumberFormatException e){
+                System.out.println("\nYou have input a text instead of a valid integer option\n");
+                continue;
+            }
+
+            if (!this.handleSelection(option)){
+                break;
+            }
+        }
+    }
+
+    private void displayMenu(){
+        System.out.println("Coursework Dictionary Application\n");
         System.out.printf("%d.) Read a file\n", Options.InputFile.getValue());
         System.out.printf("%d.) Input text in console\n", Options.InputText.getValue());
         System.out.printf("%d.) Set dictionary source\n", Options.SetDictionary.getValue());
@@ -41,27 +61,28 @@ public class Menu {
 
     private void printStringArray(StringArray words){
         for (int i = 0; i < words.size(); i++) {
-            System.out.println(words.get(i));
+            System.out.printf("%d.) %s \n",i + 1,words.get(i));
         }
+        System.out.println();
     }
 
     private void handleFile(){
         System.out.print("Please input your filename: ");
-        Input input = new Input();
         String fileName = input.nextLine();
         StringArray excludedWords = controller.getExcludedWordsFromFile(fileName);
+        System.out.println("\nWords not in dictionary from the file\n");
         printStringArray(excludedWords);
     }
 
     private void handleText(){
         System.out.print("Please input your text: ");
-        Input input = new Input();
         String text = input.nextLine();
         StringArray excludedWords = controller.getExcludedWordsFromString(text);
+        System.out.println("\nWords not in dictionary from the string inputted\n");
         printStringArray(excludedWords);
     }
 
-    public boolean handleSelection(int input, Dictionary dictionary){
+    private boolean handleSelection(int input){
         Options value = Options.getOptionFromInteger(input);
         switch (value){
             case InputFile:
