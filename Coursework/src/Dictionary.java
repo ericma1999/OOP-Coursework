@@ -17,14 +17,15 @@ public class Dictionary extends StringArray{
         }
 
         int start = 0;
-        int end = this.size();
+        int end = this.size() - 1;
 
         while (start <= end){
             int mid = (start + end ) / 2;
 
             String midValue = this.get(mid);
-
+            System.out.println(midValue);
             if (midValue.equals(word)){
+
                 return mid;
             }
 
