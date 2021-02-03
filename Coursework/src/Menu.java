@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Menu {
 
     private Controller controller;
@@ -104,13 +102,11 @@ public class Menu {
             case SetDictionary:
                 System.out.println("selected setdictionary");
                 break;
-            case Invalid:
-                System.out.println("Option selected was invalid, please try again");
-                break;
             case Exit:
                 System.out.println("Exiting program");
                 return false;
             default:
+                System.out.println("Option selected was invalid, please try again");
                 break;
         }
 

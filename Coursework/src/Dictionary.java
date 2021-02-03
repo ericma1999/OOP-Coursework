@@ -5,7 +5,7 @@ public class Dictionary extends StringArray{
         this.readFileContents(dictionarySource);
     }
 
-//    search can utilise binary search instead of normal loop since its in order
+//    search can utilise binary search instead of normal loop since its in alphabetical order
     public boolean search(String word){
         return this.binarySearch(word) != -1;
     }
