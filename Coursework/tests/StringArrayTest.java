@@ -168,6 +168,43 @@ class StringArrayTest {
     }
 
     @Test
+    void testArrayResizingReduction(){
+        StringArray test = new StringArray();
+
+        for (int i = 0; i < 101; i++) {
+            test.add("hello".concat(String.valueOf(i)));
+        }
+
+        assertEquals(101, test.size());
+
+        test.actualSize();
+
+        for (int i = 0; i < 50; i++) {
+            test.remove(0);
+        }
+
+        test.actualSize();
+    }
+
+    @Test
+    void testArrayResizingReduction2(){
+        StringArray test = new StringArray();
+
+        for (int i = 0; i < 151; i++) {
+            test.add("hello".concat(String.valueOf(i)));
+        }
+
+//        assertEquals(101, test.size());
+
+        test.actualSize();
+
+        for (int i = 0; i < 50; i++) {
+            test.remove(0);
+        }
+
+        test.actualSize();
+    }
+    @Test
     void secondConstructor(){
         StringArray testArray2 = new StringArray(testArray);
 

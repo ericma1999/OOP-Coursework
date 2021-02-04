@@ -3,6 +3,7 @@ public class StringArray {
     private String[] stringArray;
     private int length = 0;
     private final int initialSize = 100;
+    private final double growthRate = 1.5;
 
     public StringArray(){
         this.stringArray = new String[initialSize];
@@ -79,18 +80,20 @@ public class StringArray {
             this.stringArray = new String[initialSize];
             this.length = 0;
         }else if (index == 0){
-            String[] newArray = new String [this.length - 1];
+            String[] newArray = new String [this.stringArray.length];
             System.arraycopy(this.stringArray, 1, newArray, 0, this.length - 1);
             this.length -= 1;
             this.stringArray = newArray;
         }
         else {
-            String[] newArray = new String [this.length - 1];
+            String[] newArray = new String [this.stringArray.length];
             System.arraycopy(this.stringArray, 0, newArray, 0, index);
             System.arraycopy(this.stringArray, index + 1, newArray, index, this.length - (index + 1));
             this.length -= 1;
             this.stringArray = newArray;
         }
+
+        performResizeIfNeeded();
 
     }
 
@@ -122,9 +125,10 @@ public class StringArray {
     }
 
     private void performResizeIfNeeded(){
-        if (this.length == this.stringArray.length){
-
-            resizeContainerArray(this.stringArray.length + initialSize);
+        if(this.stringArray.length > initialSize && this.length <= this.stringArray.length / growthRate){
+            resizeContainerArray((int) (this.stringArray.length / growthRate));
+        }else if (this.length == this.stringArray.length){
+            resizeContainerArray((int) (this.stringArray.length * growthRate));
         }
     }
 
@@ -146,7 +150,7 @@ public class StringArray {
         }
     }
 //
-//    public void actualSize(){
-//        System.out.println(this.stringArray.length);
-//    }
+    public void actualSize(){
+        System.out.println(this.stringArray.length);
+    }
 }
