@@ -20,18 +20,24 @@ public class Dictionary extends StringArray{
         this.alphabetCount[getAlphabetIndex(word)] += 1;
     }
 
+
+
     /*  get the offset of the alphabet*/
     private int getAlphabetIndex(String word){
         return word.charAt(0) - 'a';
     }
-    
+
     /*  tally up the count for each of the word starting with same alphabet */
-    private int getSearchStartPos(int alphabetIndex){
+    public int getSearchStartPos(int alphabetIndex){
         if (alphabetIndex == 0){
             return 0;
         }else{
             return this.getSearchStartPos(alphabetIndex - 1) + this.alphabetCount[alphabetIndex - 1];
         }
+    }
+
+    public int getIndexEndForStartingChar(int alphabetIndex){
+        return this.getSearchStartPos(alphabetIndex) + this.alphabetCount[alphabetIndex] - 1;
     }
 
 
@@ -45,7 +51,8 @@ public class Dictionary extends StringArray{
 //        int start = 0;
 //        int end = this.size() - 1;
         int start = getSearchStartPos(alphabetIndex);
-        int end = start + this.alphabetCount[alphabetIndex] - 1;
+//        int end = start + this.alphabetCount[alphabetIndex] - 1;
+        int end = this.getIndexEndForStartingChar(alphabetIndex);
 
         while (start <= end){
             int mid = (start + end ) / 2;

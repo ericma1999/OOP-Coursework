@@ -17,8 +17,6 @@ public class Controller {
         return findWordsInString(text).getExcluded();
     }
 
-    public StringArray getIncludedWordsFromString(String text) {return findWordsInString(text).getIncluded();}
-
     public void start(){
         view.initialiseMenu();
     }
