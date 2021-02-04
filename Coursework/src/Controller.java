@@ -55,7 +55,7 @@ public class Controller {
 
 
     private String[] sanitiseString(String input){
-        return input.replaceAll("\\W", " ").split("\\s+");
+        return input.replaceAll("\\W", " ").toLowerCase().split("\\s+");
     }
 
 }
