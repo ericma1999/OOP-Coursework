@@ -2,14 +2,13 @@ public class Main {
 
     public static void main(String[] args) {
         Menu menu = new Menu();
-        Dictionary dictionary = new Dictionary("words");
+        Dictionary dictionary = new Dictionary("test");
         Corrector corrector = new Corrector(dictionary, 4);
 
-        StringArray excludedWords = new StringArray();
-        excludedWords.add("llo");
-        excludedWords.add("ac");
-
-
+//        StringArray excludedWords = new StringArray();
+//        excludedWords.add("helooo");
+//        excludedWords.add("nani");
+//
 //        StringArray[] test = corrector.generateSuggestions(excludedWords);
 //        for (int i = 0; i < test.length; i++) {
 //            StringArray current = test[i];
@@ -19,7 +18,7 @@ public class Main {
 //        }
 
 
-        Controller applicationController = new Controller(menu, dictionary);
+        Controller applicationController = new Controller(menu, dictionary, corrector);
 
         applicationController.start();
     }

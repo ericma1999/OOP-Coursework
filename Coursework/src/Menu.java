@@ -57,6 +57,17 @@ public class Menu {
         System.out.printf("%d.) Exit/Close application\n", Options.Exit.getValue());
     }
 
+    private void printStringArrayHorizontal(StringArray words){
+        for (int i = 0; i < words.size(); i++) {
+            System.out.printf("%d.) %s ",i + 1,words.get(i));
+            if (i % 4 == 0 && i != 0){
+                System.out.println("test");
+                System.out.println();
+            }
+        }
+        System.out.println();
+    }
+
     private void printStringArray(StringArray words){
         for (int i = 0; i < words.size(); i++) {
             System.out.printf("%d.) %s \n",i + 1,words.get(i));
@@ -77,6 +88,13 @@ public class Menu {
         }
     }
 
+    private void handleTextCorrection(StringArray excludedWords){
+        System.out.println("\nCorrection Available\n");
+        controller.handleCorrection(excludedWords);
+        this.printStringArrayHorizontal(excludedWords);
+
+    }
+
     private void handleText(){
         System.out.print("Please input your text: ");
         String text = input.nextLine();
@@ -85,6 +103,7 @@ public class Menu {
         if (excludedWords.size() > 0){
             System.out.println("\nWords not in dictionary from the string inputted\n");
             printStringArray(excludedWords);
+            handleTextCorrection(excludedWords);
         }else{
             System.out.println("\nAll words were in the dictionary\n");
         }

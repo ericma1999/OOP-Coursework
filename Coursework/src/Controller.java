@@ -2,11 +2,31 @@ public class Controller {
 
     private Dictionary dictionary;
     private Menu view;
+    private Corrector corrector;
 
-    public Controller(Menu view, Dictionary dictionary){
+    public Controller(Menu view, Dictionary dictionary, Corrector corrector){
         this.dictionary = dictionary;
         this.view = view;
+        this.corrector = corrector;
         view.setController(this);
+    }
+
+    public void handleCorrection(StringArray excludedWords){
+        StringArray[] suggestions = corrector.generateSuggestions(excludedWords);
+
+        int i = 0;
+        System.out.println(excludedWords.get(0));
+        System.out.println(excludedWords.size());
+        int removed = 0;
+        while (i < suggestions.length){
+            if (suggestions[i].isEmpty()){
+                excludedWords.remove(i - removed);
+                removed+=1;
+                System.out.println(excludedWords.get(i));
+            }
+            i++;
+        }
+        System.out.println(excludedWords.size());
     }
 
     public StringArray getExcludedWordsFromFile(String filename){

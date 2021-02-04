@@ -108,6 +108,18 @@ class StringArrayTest {
     }
 
     @Test
+    void removeSingleItem(){
+        testArray = new StringArray();
+        testArray.add("hello");
+
+        System.out.println(testArray.size());
+        testArray.remove(0);
+        System.out.println(testArray.size());
+
+        assertTrue(testArray.isEmpty());
+    }
+
+    @Test
     void removeInvalidIndex(){
         testArray.remove(5);
         assertEquals(3, testArray.size());
