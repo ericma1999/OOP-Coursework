@@ -1,32 +1,62 @@
 public class Corrector {
 
     private String originalString;
-    private String alteredString;
+    private String fixedString;
     private Dictionary dictionary;
     private final int tolerance;
+    private Corrections[] corrections;
 
     public Corrector(Dictionary dictionary, int tolerance){
         this.dictionary = dictionary;
         this.tolerance = tolerance;
     }
+    public Corrections findCorrection(String word){
+        for(Corrections correction: corrections){
+            if (correction.getIncorrectWord().equals(word)){
+                return correction;
+            }
+        }
 
-    public StringArray[] generateSuggestions(StringArray excludedWords){
-        StringArray[] suggestions = new StringArray[excludedWords.size()];
+        return null;
+    }
+
+    public String applyChanges(String word, int option){
+
+        Corrections correction = this.findCorrection(word);
+        String selectedValue = correction.getSuggestions().get(option);
+        String incorrectWord = correction.getIncorrectWord();
+
+        String regex = String.format("\\b%s\\b", incorrectWord);
+        this.fixedString = this.fixedString.replaceAll(regex, selectedValue);
+        System.out.println(this.fixedString);
+        return this.fixedString;
+    }
+
+    public String fixedString(){
+        return this.fixedString;
+    }
+
+    public void generateSuggestions(String originalString, StringArray excludedWords){
+        this.originalString = originalString;
+        this.fixedString = originalString;
+        StringArray suggestions;
+        Corrections[] corrections = new Corrections[excludedWords.size()];
         for (int i = 0; i < excludedWords.size(); i++) {
             String currentWord = excludedWords.get(i);
-            suggestions[i] = new StringArray();
-
+            suggestions = new StringArray();
             for (int j = 0; j < dictionary.size(); j++) {
                 String currentDictionaryWord = dictionary.get(j);
                 if(currentDictionaryWord.contains(currentWord.toLowerCase()) &&
                         currentDictionaryWord.length() < currentWord.length() + this.tolerance){
-                    suggestions[i].add(currentDictionaryWord);
+                    suggestions.add(currentDictionaryWord);
                 }
             }
+            corrections[i] = new Corrections(currentWord, suggestions);
         }
-        return suggestions;
+        this.corrections = corrections;
     }
 
-
-
+    public Corrections[] getCorrections(){
+        return this.corrections;
+    }
 }

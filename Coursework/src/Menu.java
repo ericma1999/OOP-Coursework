@@ -61,7 +61,6 @@ public class Menu {
         for (int i = 0; i < words.size(); i++) {
             System.out.printf("%d.) %s ",i + 1,words.get(i));
             if (i % 4 == 0 && i != 0){
-                System.out.println("test");
                 System.out.println();
             }
         }
@@ -88,10 +87,22 @@ public class Menu {
         }
     }
 
-    private void handleTextCorrection(StringArray excludedWords){
-        System.out.println("\nCorrection Available\n");
-        controller.handleCorrection(excludedWords);
-        this.printStringArrayHorizontal(excludedWords);
+    private void handleTextCorrection(String originalText, StringArray excludedWords){
+        Corrections[] corrections = controller.generatePossibleCorrection(originalText, excludedWords);
+        int i = 0;
+        while (i < corrections.length){
+            Corrections correction = corrections[i];
+            if(!correction.getSuggestions().isEmpty()){
+                System.out.printf("Current Text: %s\n", originalText);
+                System.out.printf("Correction available for: %s\n", correction.getIncorrectWord());
+                this.printStringArrayHorizontal(correction.getSuggestions());
+                System.out.println("\nPress any key to skip\n");
+                int option = Integer.parseInt(input.nextLine());
+                controller.applyCorrection(correction.getIncorrectWord(), option - 1);
+            }
+
+            i++;
+        }
 
     }
 
@@ -103,7 +114,7 @@ public class Menu {
         if (excludedWords.size() > 0){
             System.out.println("\nWords not in dictionary from the string inputted\n");
             printStringArray(excludedWords);
-            handleTextCorrection(excludedWords);
+            handleTextCorrection(text, excludedWords);
         }else{
             System.out.println("\nAll words were in the dictionary\n");
         }

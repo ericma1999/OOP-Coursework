@@ -11,22 +11,14 @@ public class Controller {
         view.setController(this);
     }
 
-    public void handleCorrection(StringArray excludedWords){
-        StringArray[] suggestions = corrector.generateSuggestions(excludedWords);
+    public Corrections[] generatePossibleCorrection(String originalString, StringArray excludedWords){
+        corrector.generateSuggestions(originalString, excludedWords);
+        Corrections[] suggestions = corrector.getCorrections();
+        return suggestions;
+    }
 
-        int i = 0;
-        System.out.println(excludedWords.get(0));
-        System.out.println(excludedWords.size());
-        int removed = 0;
-        while (i < suggestions.length){
-            if (suggestions[i].isEmpty()){
-                excludedWords.remove(i - removed);
-                removed+=1;
-                System.out.println(excludedWords.get(i));
-            }
-            i++;
-        }
-        System.out.println(excludedWords.size());
+    public String applyCorrection(String word, int option){
+        return corrector.applyChanges(word, option);
     }
 
     public StringArray getExcludedWordsFromFile(String filename){
