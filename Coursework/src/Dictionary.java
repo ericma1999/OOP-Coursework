@@ -1,6 +1,6 @@
 public class Dictionary extends StringArray{
 
-
+    /* Variable to keep track of number of words with same starting alphabet */
     private int[] alphabetCount = new int[26];
 
     public Dictionary(String dictionarySource){
@@ -8,7 +8,7 @@ public class Dictionary extends StringArray{
         this.readFileContents(dictionarySource);
     }
 
-//    search can utilise binary search instead of normal loop since its in alphabetical order
+    /* search can utilise binary search instead of normal loop since its in alphabetical order */
     @Override
     public int indexOf(String s){
         return this.binarySearch(s);
@@ -20,10 +20,12 @@ public class Dictionary extends StringArray{
         this.alphabetCount[getAlphabetIndex(word)] += 1;
     }
 
+    /*  get the offset of the alphabet*/
     private int getAlphabetIndex(String word){
         return word.charAt(0) - 'a';
     }
-
+    
+    /*  tally up the count for each of the word starting with same alphabet */
     private int getSearchStartPos(int alphabetIndex){
         if (alphabetIndex == 0){
             return 0;
@@ -61,7 +63,6 @@ public class Dictionary extends StringArray{
             }
         }
         return -1;
-
     }
 
     //    assume file is in correct order of words.txt
