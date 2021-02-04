@@ -4,7 +4,7 @@ public class Menu {
     private Input input = new Input();
 
     enum Options{
-        InputFile(1), InputText(2), SetDictionary(3), Exit(4), Invalid(5);
+        InputFile(1), InputText(2), Exit(3), Invalid(4);
 
         private int id;
         Options(int id) {
@@ -53,7 +53,6 @@ public class Menu {
         System.out.println("Coursework Dictionary Application\n");
         System.out.printf("%d.) Read a file\n", Options.InputFile.getValue());
         System.out.printf("%d.) Input text in console\n", Options.InputText.getValue());
-        System.out.printf("%d.) Set dictionary source\n", Options.SetDictionary.getValue());
         System.out.printf("%d.) Exit/Close application\n", Options.Exit.getValue());
     }
 
@@ -129,9 +128,6 @@ public class Menu {
             case InputText:
                 handleText();
                 break;
-            case SetDictionary:
-                System.out.println("selected setdictionary");
-                break;
             case Exit:
                 System.out.println("Exiting program");
                 return false;
@@ -139,7 +135,6 @@ public class Menu {
                 System.out.println("Option selected was invalid, please try again");
                 break;
         }
-
         return true;
     }
 
