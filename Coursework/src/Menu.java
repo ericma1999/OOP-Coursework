@@ -112,11 +112,6 @@ public class Menu {
         }
     }
 
-    private String getInput(String text){
-        System.out.printf(text + ": ");
-        return input.nextLine();
-    }
-
     public void handleWriteContentToFile(StringArray correctedContent){
         System.out.println("The corrected content are below\n");
         this.printFileContents(correctedContent);
@@ -169,6 +164,11 @@ public class Menu {
                 System.out.println("Input was not a number");
             }
         }
+    }
+
+    private String getInput(String text){
+        System.out.printf(text + ": ");
+        return input.nextLine();
     }
 
     private boolean handleSelection(int input){
