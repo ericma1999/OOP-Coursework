@@ -52,7 +52,12 @@ public class StringArray {
     }
 
     public void insert(int index, String s){
-        if (index >= 0 && index <= this.length){
+        if (this.length == 0 && index == 0){
+            this.add(s);
+            return;
+        }
+
+        if (index >= 0 && index < this.length){
 
             System.arraycopy(this.stringArray, index, this.stringArray, index+1, this.length - index);
             this.stringArray[index] = s;

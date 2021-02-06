@@ -83,6 +83,10 @@ class StringArrayTest {
 
     @Test
     void insertAtEnd(){
+        testArray.insert(3, "insert at real end");
+        assertEquals("insert at real end", testArray.get(3));
+
+
         testArray.insert(2, "insert at end");
         assertEquals("insert at end", testArray.get(2));
         assertEquals("hello3", testArray.get(testArray.size() - 1));
