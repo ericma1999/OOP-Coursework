@@ -11,13 +11,25 @@ public class Controller {
         view.setController(this);
     }
 
-    public Corrections[] generatePossibleCorrection(String originalString, StringArray excludedWords){
-        spellChecker.generateSuggestions(originalString, excludedWords);
-        return spellChecker.getCorrections();
+    public void handleCorrection(String originalText, StringArray excludedWords){
+        spellChecker.setText(originalText);
+
+        for (int i = 0; i < excludedWords.size(); i++) {
+            String currentWord = excludedWords.get(i);
+            Corrections corrections = spellChecker.generateSuggestions(currentWord);
+            StringArray suggestions = corrections.getSuggestions();
+            if (suggestions.size() == 0){
+                view.handleNoSuggestions(currentWord);
+                continue;
+            }else {
+                view.handleTextCorrection(originalText, corrections);
+            }
+        }
+        view.handleWriteFile(spellChecker.getFixedString());
     }
 
-    public String applyCorrection(String word, int option){
-        return spellChecker.applyChanges(word, option);
+    public String applyCorrection(String word, String correctedWord){
+        return spellChecker.applyChanges(word, correctedWord);
     }
 
     public StringArray getExcludedWordsFromFile(String filename){
@@ -33,8 +45,7 @@ public class Controller {
     }
 
     public void writeToFile(String fileName){
-        System.out.println(fileName);
-        FileOutput out = new FileOutput("hello.txt");
+        FileOutput out = new FileOutput(fileName + ".txt");
         out.writeString(spellChecker.getFixedString());
         out.close();
     }
@@ -42,7 +53,6 @@ public class Controller {
     public String getCurrentCorrectedText(){
         return spellChecker.getFixedString();
     }
-
 
     private Tuple findWordsInFile(String fileName){
         FileInput file = new FileInput(fileName);
@@ -73,7 +83,6 @@ public class Controller {
         }
         return new Tuple(included, excluded);
     }
-
 
     private String[] sanitiseString(String input){
         return input.replaceAll("\\W", " ").toLowerCase().split("\\s+");

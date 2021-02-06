@@ -1,14 +1,14 @@
 public class Corrections {
-    private String incorrectWord;
+    private String word;
     private StringArray suggestions;
 
     public Corrections(String incorrectWord, StringArray suggestions){
-        this.incorrectWord = incorrectWord;
+        this.word = incorrectWord;
         this.suggestions = suggestions;
     }
 
-    public String getIncorrectWord(){
-        return this.incorrectWord;
+    public String getWord(){
+        return this.word;
     }
 
     public StringArray getSuggestions(){

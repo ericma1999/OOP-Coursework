@@ -11,7 +11,7 @@ public class SpellChecker {
     }
     public Corrections findCorrection(String word){
         for(Corrections correction: corrections){
-            if (correction.getIncorrectWord().equals(word)){
+            if (correction.getWord().equals(word)){
                 return correction;
             }
         }
@@ -19,18 +19,18 @@ public class SpellChecker {
         return null;
     }
 
+    public void setText(String text){
+        this.fixedString = text;
+    }
+
     public String getFixedString(){
         return this.fixedString;
     }
 
-    public String applyChanges(String word, int option){
+    public String applyChanges(String word, String correctedWord){
 
-        Corrections correction = this.findCorrection(word);
-        String selectedValue = correction.getSuggestions().get(option);
-        String incorrectWord = correction.getIncorrectWord();
-
-        String regex = String.format("\\b%s\\b", incorrectWord);
-        this.fixedString = this.fixedString.replaceAll(regex, selectedValue);
+        String regex = String.format("\\b%s\\b", word);
+        this.fixedString = this.fixedString.replaceAll(regex, correctedWord);
         return this.fixedString;
     }
 
@@ -38,23 +38,19 @@ public class SpellChecker {
         return this.fixedString;
     }
 
-    public void generateSuggestions(String originalString, StringArray excludedWords){
-        this.fixedString = originalString;
-        StringArray suggestions;
-        Corrections[] corrections = new Corrections[excludedWords.size()];
-        for (int i = 0; i < excludedWords.size(); i++) {
-            String currentWord = excludedWords.get(i);
-            suggestions = new StringArray();
-            for (int j = 0; j < dictionary.size(); j++) {
-                String currentDictionaryWord = dictionary.get(j);
-                if(currentDictionaryWord.contains(currentWord.toLowerCase()) &&
-                        currentDictionaryWord.length() < currentWord.length() + this.tolerance){
-                    suggestions.add(currentDictionaryWord);
-                }
+    public Corrections generateSuggestions(String excludedWord){
+
+        StringArray suggestions = new StringArray();
+
+        for (int i = 0; i < dictionary.size(); i++) {
+            String currentDictionaryWord = dictionary.get(i);
+
+            if (currentDictionaryWord.contains(excludedWord.toLowerCase()) &&
+                    currentDictionaryWord.length() < excludedWord.length() + this.tolerance){
+                suggestions.add(currentDictionaryWord);
             }
-            corrections[i] = new Corrections(currentWord, suggestions);
         }
-        this.corrections = corrections;
+        return new Corrections(excludedWord, suggestions);
     }
 
     public Corrections[] getCorrections(){

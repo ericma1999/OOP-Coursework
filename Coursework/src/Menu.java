@@ -91,26 +91,47 @@ public class Menu {
         return input.nextLine();
     }
 
-    private void handleTextCorrection(String originalText, StringArray excludedWords){
-        Corrections[] corrections = controller.generatePossibleCorrection(originalText, excludedWords);
-        int i = 0;
+    public void handleWriteFile(String correctedText){
 
-        while (i < corrections.length){
+        System.out.printf("Corrected text is: %s\n", correctedText);
 
-            Corrections correction = corrections[i];
-            if(!correction.getSuggestions().isEmpty()){
-                System.out.printf("\nCurrent Text: %s\n", controller.getCurrentCorrectedText());
-                System.out.printf("\nCorrection available for: %s\n", correction.getIncorrectWord());
-                this.printStringArrayHorizontal(correction.getSuggestions());
-                System.out.println("\nPress any key to skip\n");
-                int option = Integer.parseInt(input.nextLine());
-                controller.applyCorrection(correction.getIncorrectWord(), option - 1);
-            }
+        String input = getInput("Would you like to write correction to a file?(Y/N)");
 
-            i++;
+        if(input.toLowerCase().equals("y")){
+            controller.writeToFile(getInput("Type in a file name"));
         }
-        controller.writeToFile(getInput("Type in a file name"));
+    }
 
+    public void handleNoSuggestions(String word){
+        System.out.printf("There was no suggestions available for %s\n", word);
+        System.out.println("Skipping correction....");
+    }
+
+    public void handleTextCorrection(String originalText, Corrections correction){
+        while (true){
+            System.out.printf("\nCurrent Text: %s\n", controller.getCurrentCorrectedText());
+            System.out.printf("\nCorrection available for: %s\n", correction.getWord());
+            this.printStringArrayHorizontal(correction.getSuggestions());
+            System.out.println("\nPress 0 to skip this correction\n");
+
+            try{
+                int option = Integer.parseInt(input.nextLine());
+
+                if (option == 0){
+                    break;
+                }
+
+                if (option < 0 || option > correction.getSuggestions().size()){
+                    System.out.println("Selected value was out or range");
+                    continue;
+                }
+                controller.applyCorrection(correction.getWord(), correction.getSuggestions().get(option - 1));
+                break;
+
+            } catch(NumberFormatException e){
+                System.out.println("Input was not a number");
+            }
+        }
     }
 
     private void handleText(){
@@ -121,7 +142,7 @@ public class Menu {
         if (excludedWords.size() > 0){
             System.out.println("\nWords not in dictionary from the string inputted\n");
             printStringArray(excludedWords);
-            handleTextCorrection(text, excludedWords);
+            controller.handleCorrection(text, excludedWords);
         }else{
             System.out.println("\nAll words were in the dictionary\n");
         }
