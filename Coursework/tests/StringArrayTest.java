@@ -93,6 +93,7 @@ class StringArrayTest {
         testArray = new StringArray();
         testArray.insert(0, "hello");
         assertEquals(1, testArray.size());
+        assertEquals("hello",testArray.get(0));
 
         testArray = new StringArray();
 

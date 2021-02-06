@@ -23,15 +23,18 @@ public class StringArray {
         this.stringArray = newArray;
     }
 
-    public int size() {return this.length;}
+    public int size() {
+        return this.length;
+    }
 
     public boolean isEmpty(){
         return this.length == 0;
     }
 
     public String get(int index){
-        if (index < 0 || index > this.length) return null;
-
+        if (index < 0 || index > this.length) {
+            return null;
+        }
         return this.stringArray[index];
     }
 
@@ -49,24 +52,11 @@ public class StringArray {
     }
 
     public void insert(int index, String s){
-        if (this.length == 0 && index == 0){
-            this.add(s);
-            return;
-        }
-//        either insert at index 0 or somewhere in the middle
-        if (index >= 0 && index < this.length){
-            if (index == 0){
-                System.arraycopy(this.stringArray, 0, this.stringArray, 1, this.length);
-                this.stringArray[0] = s;
-                this.length += 1;
-            }else{
-                String[] newStringArray = new String[this.stringArray.length + 1];
-                System.arraycopy(this.stringArray, 0, newStringArray, 0, index);
-                System.arraycopy(this.stringArray, index, newStringArray, index+1, this.length - index);
-                newStringArray[index] = s;
-                this.length += 1;
-                this.stringArray = newStringArray;
-            }
+        if (index >= 0 && index <= this.length){
+
+            System.arraycopy(this.stringArray, index, this.stringArray, index+1, this.length - index);
+            this.stringArray[index] = s;
+            this.length += 1;
 
             performResizeIfNeeded();
 
