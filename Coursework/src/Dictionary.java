@@ -7,7 +7,6 @@ public class Dictionary extends StringArray{
         super();
         this.readFileContents(dictionarySource);
     }
-
     /* search can utilise binary search instead of normal loop since its in alphabetical order */
     @Override
     public int indexOf(String s){
@@ -19,8 +18,6 @@ public class Dictionary extends StringArray{
         super.add(word);
         this.alphabetCount[getAlphabetIndex(word)] += 1;
     }
-
-
 
     /*  get the offset of the alphabet*/
     private int getAlphabetIndex(String word){
@@ -62,7 +59,6 @@ public class Dictionary extends StringArray{
 
                 return mid;
             }
-
             if (midValue.compareTo(word) < 0){
                 start = mid + 1;
             }else {

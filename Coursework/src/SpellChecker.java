@@ -1,12 +1,11 @@
-public class Corrector {
+public class SpellChecker {
 
-    private String originalString;
     private String fixedString;
     private Dictionary dictionary;
     private final int tolerance;
     private Corrections[] corrections;
 
-    public Corrector(Dictionary dictionary, int tolerance){
+    public SpellChecker(Dictionary dictionary, int tolerance){
         this.dictionary = dictionary;
         this.tolerance = tolerance;
     }
@@ -20,6 +19,10 @@ public class Corrector {
         return null;
     }
 
+    public String getFixedString(){
+        return this.fixedString;
+    }
+
     public String applyChanges(String word, int option){
 
         Corrections correction = this.findCorrection(word);
@@ -28,7 +31,6 @@ public class Corrector {
 
         String regex = String.format("\\b%s\\b", incorrectWord);
         this.fixedString = this.fixedString.replaceAll(regex, selectedValue);
-        System.out.println(this.fixedString);
         return this.fixedString;
     }
 
@@ -37,7 +39,6 @@ public class Corrector {
     }
 
     public void generateSuggestions(String originalString, StringArray excludedWords){
-        this.originalString = originalString;
         this.fixedString = originalString;
         StringArray suggestions;
         Corrections[] corrections = new Corrections[excludedWords.size()];

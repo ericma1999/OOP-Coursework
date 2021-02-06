@@ -1,24 +1,23 @@
 public class Controller {
 
-    private Dictionary dictionary;
-    private Menu view;
-    private Corrector corrector;
+    private final Dictionary dictionary;
+    private final Menu view;
+    private final SpellChecker spellChecker;
 
-    public Controller(Menu view, Dictionary dictionary, Corrector corrector){
+    public Controller(Menu view, Dictionary dictionary, SpellChecker spellChecker){
         this.dictionary = dictionary;
         this.view = view;
-        this.corrector = corrector;
+        this.spellChecker = spellChecker;
         view.setController(this);
     }
 
     public Corrections[] generatePossibleCorrection(String originalString, StringArray excludedWords){
-        corrector.generateSuggestions(originalString, excludedWords);
-        Corrections[] suggestions = corrector.getCorrections();
-        return suggestions;
+        spellChecker.generateSuggestions(originalString, excludedWords);
+        return spellChecker.getCorrections();
     }
 
     public String applyCorrection(String word, int option){
-        return corrector.applyChanges(word, option);
+        return spellChecker.applyChanges(word, option);
     }
 
     public StringArray getExcludedWordsFromFile(String filename){
@@ -32,6 +31,18 @@ public class Controller {
     public void start(){
         view.initialiseMenu();
     }
+
+    public void writeToFile(String fileName){
+        System.out.println(fileName);
+        FileOutput out = new FileOutput("hello.txt");
+        out.writeString(spellChecker.getFixedString());
+        out.close();
+    }
+
+    public String getCurrentCorrectedText(){
+        return spellChecker.getFixedString();
+    }
+
 
     private Tuple findWordsInFile(String fileName){
         FileInput file = new FileInput(fileName);

@@ -1,12 +1,12 @@
 public class Menu {
 
     private Controller controller;
-    private Input input = new Input();
+    private final Input input = new Input();
 
     enum Options{
         InputFile(1), InputText(2), Exit(3), Invalid(4);
 
-        private int id;
+        private final int id;
         Options(int id) {
             this.id = id;
         }
@@ -86,14 +86,21 @@ public class Menu {
         }
     }
 
+    private String getInput(String text){
+        System.out.printf(text + ": ");
+        return input.nextLine();
+    }
+
     private void handleTextCorrection(String originalText, StringArray excludedWords){
         Corrections[] corrections = controller.generatePossibleCorrection(originalText, excludedWords);
         int i = 0;
+
         while (i < corrections.length){
+
             Corrections correction = corrections[i];
             if(!correction.getSuggestions().isEmpty()){
-                System.out.printf("Current Text: %s\n", originalText);
-                System.out.printf("Correction available for: %s\n", correction.getIncorrectWord());
+                System.out.printf("\nCurrent Text: %s\n", controller.getCurrentCorrectedText());
+                System.out.printf("\nCorrection available for: %s\n", correction.getIncorrectWord());
                 this.printStringArrayHorizontal(correction.getSuggestions());
                 System.out.println("\nPress any key to skip\n");
                 int option = Integer.parseInt(input.nextLine());
@@ -102,6 +109,7 @@ public class Menu {
 
             i++;
         }
+        controller.writeToFile(getInput("Type in a file name"));
 
     }
 
