@@ -11,21 +11,38 @@ public class Controller {
         view.setController(this);
     }
 
+    public void handleFileCorrection(String fileName){
+        System.out.println(fileName + "test");
+        FileInput file = new FileInput(fileName);
+
+        while (file.hasNextLine()){
+            String currentText = file.nextLine();
+            StringArray excludedWords = this.getExcludedWordsFromString(file.nextLine());
+            this.handleSingleLineCorrection(currentText, excludedWords);
+        }
+
+        file.close();
+    }
+
     public void handleCorrection(String originalText, StringArray excludedWords){
         spellChecker.setText(originalText);
 
+        this.handleSingleLineCorrection(originalText, excludedWords);
+        view.handleWriteFile(spellChecker.getFixedString());
+    }
+
+    private void handleSingleLineCorrection(String originalText, StringArray excludedWords){
         for (int i = 0; i < excludedWords.size(); i++) {
             String currentWord = excludedWords.get(i);
-            Corrections corrections = spellChecker.generateSuggestions(currentWord);
-            StringArray suggestions = corrections.getSuggestions();
+            Correction correction = spellChecker.generateSuggestions(currentWord);
+            StringArray suggestions = correction.getSuggestions();
             if (suggestions.size() == 0){
                 view.handleNoSuggestions(currentWord);
                 continue;
             }else {
-                view.handleTextCorrection(originalText, corrections);
+                view.handleTextCorrection(originalText, correction);
             }
         }
-        view.handleWriteFile(spellChecker.getFixedString());
     }
 
     public String applyCorrection(String word, String correctedWord){
@@ -33,14 +50,17 @@ public class Controller {
     }
 
     public StringArray getExcludedWordsFromFile(String filename){
+
         return findWordsInFile(filename).getExcluded();
     }
 
     public StringArray getExcludedWordsFromString(String text){
+
         return findWordsInString(text).getExcluded();
     }
 
     public void start(){
+
         view.initialiseMenu();
     }
 
@@ -67,6 +87,8 @@ public class Controller {
                 excluded.add(word);
             }
         }
+
+        file.close();
         return new Tuple(included, excluded);
     }
 

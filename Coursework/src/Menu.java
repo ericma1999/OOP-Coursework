@@ -78,8 +78,28 @@ public class Menu {
         String fileName = input.nextLine();
         StringArray excludedWords = controller.getExcludedWordsFromFile(fileName);
 
+        this.showExcludedWords(excludedWords);
+
         if(excludedWords.size() > 0){
-            System.out.println("\nWords not in dictionary from the file\n");
+            controller.handleFileCorrection(fileName);
+        }
+    }
+
+    private void handleText(){
+        System.out.print("Please input your text: ");
+        String text = input.nextLine();
+        StringArray excludedWords = controller.getExcludedWordsFromString(text);
+
+        this.showExcludedWords(excludedWords);
+
+        if (excludedWords.size() > 0) {
+            controller.handleCorrection(text, excludedWords);
+        }
+    }
+
+    private void showExcludedWords(StringArray excludedWords){
+        if (excludedWords.size() > 0){
+            System.out.println("\nWords not in dictionary\n");
             printStringArray(excludedWords);
         }else{
             System.out.println("\nAll words were in the dictionary\n");
@@ -103,11 +123,11 @@ public class Menu {
     }
 
     public void handleNoSuggestions(String word){
-        System.out.printf("There was no suggestions available for %s\n", word);
-        System.out.println("Skipping correction....");
+        System.out.printf("\nThere was no suggestions available for %s\n", word);
+        System.out.println("\nSkipping correction....");
     }
 
-    public void handleTextCorrection(String originalText, Corrections correction){
+    public void handleTextCorrection(String originalText, Correction correction){
         while (true){
             System.out.printf("\nCurrent Text: %s\n", controller.getCurrentCorrectedText());
             System.out.printf("\nCorrection available for: %s\n", correction.getWord());
@@ -131,20 +151,6 @@ public class Menu {
             } catch(NumberFormatException e){
                 System.out.println("Input was not a number");
             }
-        }
-    }
-
-    private void handleText(){
-        System.out.print("Please input your text: ");
-        String text = input.nextLine();
-        StringArray excludedWords = controller.getExcludedWordsFromString(text);
-
-        if (excludedWords.size() > 0){
-            System.out.println("\nWords not in dictionary from the string inputted\n");
-            printStringArray(excludedWords);
-            controller.handleCorrection(text, excludedWords);
-        }else{
-            System.out.println("\nAll words were in the dictionary\n");
         }
     }
 

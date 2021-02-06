@@ -3,14 +3,14 @@ public class SpellChecker {
     private String fixedString;
     private Dictionary dictionary;
     private final int tolerance;
-    private Corrections[] corrections;
+    private Correction[] corrections;
 
     public SpellChecker(Dictionary dictionary, int tolerance){
         this.dictionary = dictionary;
         this.tolerance = tolerance;
     }
-    public Corrections findCorrection(String word){
-        for(Corrections correction: corrections){
+    public Correction findCorrection(String word){
+        for(Correction correction: corrections){
             if (correction.getWord().equals(word)){
                 return correction;
             }
@@ -38,7 +38,7 @@ public class SpellChecker {
         return this.fixedString;
     }
 
-    public Corrections generateSuggestions(String excludedWord){
+    public Correction generateSuggestions(String excludedWord){
 
         StringArray suggestions = new StringArray();
 
@@ -50,10 +50,10 @@ public class SpellChecker {
                 suggestions.add(currentDictionaryWord);
             }
         }
-        return new Corrections(excludedWord, suggestions);
+        return new Correction(excludedWord, suggestions);
     }
 
-    public Corrections[] getCorrections(){
+    public Correction[] getCorrections(){
         return this.corrections;
     }
 }

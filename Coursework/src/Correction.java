@@ -1,8 +1,8 @@
-public class Corrections {
+public class Correction {
     private String word;
     private StringArray suggestions;
 
-    public Corrections(String incorrectWord, StringArray suggestions){
+    public Correction(String incorrectWord, StringArray suggestions){
         this.word = incorrectWord;
         this.suggestions = suggestions;
     }
