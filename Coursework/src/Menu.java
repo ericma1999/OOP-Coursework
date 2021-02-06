@@ -73,6 +73,12 @@ public class Menu {
         System.out.println();
     }
 
+    private void printFileContents(StringArray contents){
+        for (int i = 0; i < contents.size(); i++) {
+            System.out.println(contents.get(i));
+        }
+    }
+
     private void handleFile(){
         System.out.print("Please input your filename: ");
         String fileName = input.nextLine();
@@ -111,7 +117,18 @@ public class Menu {
         return input.nextLine();
     }
 
-    public void handleWriteFile(String correctedText){
+    public void handleWriteContentToFile(StringArray correctedContent){
+        System.out.println("The corrected content are below\n");
+        this.printFileContents(correctedContent);
+
+        String input = getInput("Would you like to write correction to a file?(Y/N)");
+
+        if(input.toLowerCase().equals("y")){
+            controller.writeContentToFile(getInput("Type in a file name"), correctedContent);
+        }
+    }
+
+    public void handleWriteStringToFile(String correctedText){
 
         System.out.printf("Corrected text is: %s\n", correctedText);
 

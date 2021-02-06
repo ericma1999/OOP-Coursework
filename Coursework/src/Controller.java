@@ -12,26 +12,38 @@ public class Controller {
     }
 
     public void handleFileCorrection(String fileName){
-        System.out.println(fileName + "test");
         FileInput file = new FileInput(fileName);
-
+//        FileOutput test = new FileOutput("testoutput.txt");
+        StringArray correctedText = new StringArray();
         while (file.hasNextLine()){
             String currentText = file.nextLine();
-            StringArray excludedWords = this.getExcludedWordsFromString(file.nextLine());
+            StringArray excludedWords = this.getExcludedWordsFromString(currentText);
             this.handleSingleLineCorrection(currentText, excludedWords);
+//            test.writeString(spellChecker.getFixedString());
+//            test.writeEndOfLine();
+            correctedText.add(spellChecker.getFixedString());
         }
-
+//        test.close();
         file.close();
+        view.handleWriteContentToFile(correctedText);
+    }
+
+    public void writeContentToFile(String fileName, StringArray contents){
+        FileOutput output = new FileOutput(fileName + ".txt");
+        for (int i = 0; i < contents.size(); i++) {
+            output.writeString(contents.get(i));
+            output.writeEndOfLine();
+        }
+        output.close();
     }
 
     public void handleCorrection(String originalText, StringArray excludedWords){
-        spellChecker.setText(originalText);
-
         this.handleSingleLineCorrection(originalText, excludedWords);
-        view.handleWriteFile(spellChecker.getFixedString());
+        view.handleWriteStringToFile(spellChecker.getFixedString());
     }
 
     private void handleSingleLineCorrection(String originalText, StringArray excludedWords){
+        spellChecker.setText(originalText);
         for (int i = 0; i < excludedWords.size(); i++) {
             String currentWord = excludedWords.get(i);
             Correction correction = spellChecker.generateSuggestions(currentWord);
