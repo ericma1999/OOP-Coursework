@@ -90,7 +90,6 @@ public class Controller {
             StringArray suggestions = correction.getSuggestions();
             if (suggestions.size() == 0) {
                 view.handleNoSuggestions(currentWord);
-                continue;
             } else {
                 view.handleTextCorrection(originalText, correction);
             }
