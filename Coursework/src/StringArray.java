@@ -118,18 +118,12 @@ public class StringArray {
         }
     }
 
-    private void cloneIntoNewArray(String[] newArray){
-        for (int i = 0; i < this.length; i++) {
-            newArray[i] = this.stringArray[i];
-        }
-    }
     private void resizeContainerArray(int newSize){
-//        increase the size of the array
         String[] newArray = new String[newSize];
-        cloneIntoNewArray(newArray);
+        System.arraycopy(this.stringArray, 0, newArray, 0, this.length);
         this.stringArray = newArray;
     }
-//
+
     public void print(){
         for (int i = 0; i < this.length; i++) {
             System.out.println(this.stringArray[i]);
