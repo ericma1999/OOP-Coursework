@@ -7,7 +7,7 @@ public class Correction {
         this.suggestions = suggestions;
     }
 
-    public String getWord(){
+    public String getOriginalWord(){
         return this.word;
     }
 

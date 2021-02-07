@@ -33,9 +33,11 @@ public class Menu {
 
     public void initialiseMenu(){
         while(true){
+
             this.displayMenu();
-            String userInput = this.input.nextLine();
+            String userInput = getInput("Please selection an option");
             int option;
+
             try{
                 option = Integer.parseInt(userInput);
             }catch(NumberFormatException e){
@@ -56,10 +58,10 @@ public class Menu {
         System.out.printf("%d.) Exit/Close application\n", Options.Exit.getValue());
     }
 
-    private void printStringArrayHorizontal(StringArray words){
+    private void printStringArrayHorizontal(StringArray words, int itemsPerRow){
         for (int i = 0; i < words.size(); i++) {
             System.out.printf("%d.) %s ",i + 1,words.get(i));
-            if (i % 4 == 0 && i != 0){
+            if ((i + 1) % itemsPerRow == 0){
                 System.out.println();
             }
         }
@@ -81,8 +83,7 @@ public class Menu {
     }
 
     private void handleFile(){
-        System.out.print("Please input your filename: ");
-        String fileName = input.nextLine();
+        String fileName = this.getInput("Please input your filename");
         StringArray excludedWords = controller.getExcludedWordsFromFile(fileName);
 
         this.showExcludedWords(excludedWords);
@@ -93,8 +94,7 @@ public class Menu {
     }
 
     private void handleText(){
-        System.out.print("Please input your text: ");
-        String text = input.nextLine();
+        String text = this.getInput("Please input your text");
         StringArray excludedWords = controller.getExcludedWordsFromString(text);
 
         this.showExcludedWords(excludedWords);
@@ -125,7 +125,6 @@ public class Menu {
     }
 
     public void handleWriteStringToFile(String correctedText){
-
         System.out.printf("Corrected text is: %s\n", correctedText);
 
         String input = getInput("Would you like to write correction to a file?(Y/N)");
@@ -140,13 +139,17 @@ public class Menu {
         System.out.println("\nSkipping correction....");
     }
 
-    public void handleTextCorrection(String originalText, Correction correction){
-        while (true){
-            System.out.printf("\nCurrent Text: %s\n", controller.getCurrentCorrectedText());
-            System.out.printf("\nCorrection available for: %s\n", correction.getWord());
-            this.printStringArrayHorizontal(correction.getSuggestions());
-            System.out.println("\nPress 0 to skip this correction\n");
+    private void showCurrentCorrection(Correction correction){
+        System.out.printf("\nCurrent Text: %s\n", controller.getCurrentCorrectedText());
+        System.out.printf("\nCorrection available for: %s\n", correction.getOriginalWord());
+        this.printStringArrayHorizontal(correction.getSuggestions(), 5);
+        System.out.println("\nPress 0 to skip this correction\n");
+    }
 
+    public void handleTextCorrection(Correction correction){
+        while (true){
+            this.showCurrentCorrection(correction);
+            StringArray suggestions = correction.getSuggestions();
             try{
                 int option = Integer.parseInt(input.nextLine());
 
@@ -154,15 +157,15 @@ public class Menu {
                     break;
                 }
 
-                if (option < 0 || option > correction.getSuggestions().size()){
+                if (option < 0 || option > suggestions.size()){
                     System.out.println("Selected value was out or range");
                     continue;
                 }
-                controller.applyCorrection(correction.getWord(), correction.getSuggestions().get(option - 1));
+                controller.applyCorrection(correction.getOriginalWord(), suggestions.get(option - 1));
                 break;
 
             } catch(NumberFormatException e){
-                System.out.println("Input was not a number");
+                System.out.println("Input was not a number. Please try again...");
             }
         }
     }

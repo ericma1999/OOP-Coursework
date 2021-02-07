@@ -83,7 +83,7 @@ public class Controller {
                 view.handleNoSuggestions(currentWord);
             } else {
                 suggestionAvailable = true;
-                view.handleTextCorrection(originalText, correction);
+                view.handleTextCorrection(correction);
             }
         }
 
