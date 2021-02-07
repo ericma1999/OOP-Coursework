@@ -3,15 +3,17 @@ public class Controller {
     private final Dictionary dictionary;
     private final Menu view;
     private final SpellChecker spellChecker;
+    private String dictionarySrc = "words";
 
-    public Controller(Menu view, Dictionary dictionary, SpellChecker spellChecker) {
-        this.dictionary = dictionary;
+    public Controller(Menu view) {
+        this.dictionary = new Dictionary();
         this.view = view;
-        this.spellChecker = spellChecker;
+        this.spellChecker = new SpellChecker(this.dictionary, 4);
         view.setController(this);
     }
 
     public void start() {
+        this.readDictionarySrc(this.dictionarySrc);
         view.initialiseMenu();
     }
 
@@ -119,5 +121,14 @@ public class Controller {
 
     public String getCurrentCorrectedText() {
         return spellChecker.getFixedString();
+    }
+
+    /* dictionary file will be in correct order for this program */
+    private void readDictionarySrc(String source){
+        FileInput file = new FileInput(source);
+        while(file.hasNextLine()){
+            this.dictionary.add(file.nextLine().toLowerCase());
+        }
+        file.close();
     }
 }

@@ -3,11 +3,6 @@ public class Dictionary extends StringArray{
     /* Variable to keep track of number of words with same starting alphabet */
     private final int[] alphabetCount = new int[26];
 
-    public Dictionary(String dictionarySource){
-        super();
-        this.readFileContents(dictionarySource);
-    }
-
     /* search can utilise binary search instead of normal loop since its in alphabetical order */
     @Override
     public int indexOf(String s){

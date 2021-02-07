@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DictionaryTest {
 
-    Dictionary newDictionary = new Dictionary("test");
-
-    @Test
-    void constructorTest(){
-        assertTrue(newDictionary.contains("f"));
-    }
+//    Dictionary newDictionary = new Dictionary("test");
+//
+//    @Test
+//    void constructorTest(){
+//        assertTrue(newDictionary.contains("f"));
+//    }
 
 }
