@@ -100,12 +100,27 @@ public class StringArray {
     }
 
     private int search(String s, boolean matchingCase){
+        String input;
+        boolean isNull = false;
 
-        String input = matchingCase ? s : s.toLowerCase();
-
+        if (s == null){
+            input = s;
+            isNull = true;
+        }else{
+            input = matchingCase ? s : s.toLowerCase();
+        }
         for (int i = 0; i < this.length; i++) {
+
+            if (isNull) {
+                if (this.stringArray[i] == input){
+                    return i;
+                }
+                continue;
+            }
             String currentValue = matchingCase ? this.stringArray[i] : this.stringArray[i].toLowerCase();
             if (input.equals(currentValue)) return i;
+
+
         }
         return -1;
     }
@@ -122,6 +137,19 @@ public class StringArray {
         String[] newArray = new String[newSize];
         System.arraycopy(this.stringArray, 0, newArray, 0, this.length);
         this.stringArray = newArray;
+    }
+
+    public void uniqueCombine(StringArray newWords){
+        if (newWords.size() == 0){
+            return;
+        }
+
+        for (int i = 0; i < newWords.size(); i++) {
+            String currentWord = newWords.get(i);
+            if (!this.contains(currentWord)){
+                this.add(currentWord);
+            }
+        }
     }
 
     public void print(){

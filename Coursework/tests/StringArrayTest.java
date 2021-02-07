@@ -152,6 +152,13 @@ class StringArrayTest {
     }
 
     @Test
+    void testContainsNull(){
+        testArray.add(null);
+
+        assertTrue(testArray.contains(null));
+    }
+
+    @Test
     void containsMatchingCase(){
         assertTrue( testArray.containsMatchingCase("hello"));
         assertFalse(testArray.containsMatchingCase("HELLO"));
@@ -227,6 +234,41 @@ class StringArrayTest {
 
         assertEquals(3, testArray2.size());
 
+    }
+
+    @Test
+    void testCombineEmptyStringArray(){
+        StringArray secondStringArray = new StringArray();
+
+        testArray.uniqueCombine(secondStringArray);
+        assertEquals(3, testArray.size());
+
+        testArray.print();
+    }
+
+    @Test
+    void testCombineUniqueArray(){
+        StringArray secondStringArray = new StringArray();
+        secondStringArray.add("teehee");
+        secondStringArray.add("hello2");
+        secondStringArray.add("hello3");
+
+        testArray.uniqueCombine(secondStringArray);
+
+        assertTrue(testArray.contains("teehee"));
+        assertEquals(4, testArray.size());
+        testArray.print();
+
+    }
+
+    @Test
+    void testCombineNull(){
+        StringArray secondStringArray = new StringArray();
+        secondStringArray.add(null);
+
+        testArray.uniqueCombine(secondStringArray);
+        assertEquals(4, testArray.size());
+        testArray.contains(null);
     }
 
 }
