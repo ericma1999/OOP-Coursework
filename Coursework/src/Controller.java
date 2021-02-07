@@ -17,66 +17,77 @@ public class Controller {
         view.initialiseMenu();
     }
 
+    /* dictionary file will be in correct order for this program */
+    private void readDictionarySrc(String source){
+        FileInput file = new FileInput(source);
+        while(file.hasNextLine()){
+            this.dictionary.add(file.nextLine().toLowerCase());
+        }
+        file.close();
+    }
+
     public StringArray getExcludedWordsFromString(String text) {
         return spellChecker.getExcludedWords(text);
     }
 
-    public StringArray getExcludedWordsFromFile(String filename) {
-        return this.findWordsInFile(filename).getExcluded();
-    }
-
-    private Tuple findWordsInFile(String fileName) {
+    public StringArray getExcludedWordsFromFile(String fileName) {
         FileInput file = new FileInput(fileName);
-        StringArray included = new StringArray();
         StringArray excluded = new StringArray();
 
-        while (file.hasNext()) {
-            String word = file.next();
-            if (dictionary.contains(word) && !included.contains(word)) {
-                included.add(word);
-            } else if (!dictionary.contains(word) && !excluded.contains(word)) {
-                excluded.add(word);
-            }
+        while (file.hasNextLine()){
+            String line = file.nextLine();
+            excluded.uniqueCombine(spellChecker.getExcludedWords(line));
         }
-        file.close();
-        return new Tuple(included, excluded);
+        return excluded;
     }
 
     public void handleCorrection(String originalText, StringArray excludedWords) {
-        this.handleSingleLineCorrection(originalText, excludedWords);
-        view.handleWriteStringToFile(spellChecker.getFixedString());
+        /* Check that there was at least one suggestion available */
+        if (this.handleSingleLineCorrection(originalText, excludedWords)){
+            view.handleWriteStringToFile(spellChecker.getFixedString());
+        }
     }
 
     public void handleFileCorrection(String fileName) {
 
         FileInput file = new FileInput(fileName);
-        StringArray correctedText = new StringArray();
+        StringArray correctedContent = new StringArray();
+        boolean suggestionAvailable = false;
 
         while (file.hasNextLine()) {
             String currentText = file.nextLine();
             StringArray excludedWords = this.getExcludedWordsFromString(currentText);
-            this.handleSingleLineCorrection(currentText, excludedWords);
-            correctedText.add(spellChecker.getFixedString());
+            if (this.handleSingleLineCorrection(currentText, excludedWords)){
+                suggestionAvailable = true;
+            }
+            correctedContent.add(spellChecker.getFixedString());
         }
-
         file.close();
-        view.handleWriteContentToFile(correctedText);
+
+        if (suggestionAvailable) {
+            view.handleWriteContentToFile(correctedContent);
+        }
     }
 
-    private void handleSingleLineCorrection(String originalText, StringArray excludedWords) {
+    /* Returns true if there is at least one suggestion that is not empty */
+    private boolean handleSingleLineCorrection(String originalText, StringArray excludedWords) {
         spellChecker.setText(originalText);
+        boolean suggestionAvailable =  false;
 
         for (int i = 0; i < excludedWords.size(); i++) {
             String currentWord = excludedWords.get(i);
             Correction correction = spellChecker.generateSuggestions(currentWord);
             StringArray suggestions = correction.getSuggestions();
+            
             if (suggestions.size() == 0) {
                 view.handleNoSuggestions(currentWord);
             } else {
+                suggestionAvailable = true;
                 view.handleTextCorrection(originalText, correction);
             }
         }
 
+        return suggestionAvailable;
     }
 
     public void writeToFile(String fileName) {
@@ -102,14 +113,5 @@ public class Controller {
 
     public String getCurrentCorrectedText() {
         return spellChecker.getFixedString();
-    }
-
-    /* dictionary file will be in correct order for this program */
-    private void readDictionarySrc(String source){
-        FileInput file = new FileInput(source);
-        while(file.hasNextLine()){
-            this.dictionary.add(file.nextLine().toLowerCase());
-        }
-        file.close();
     }
 }

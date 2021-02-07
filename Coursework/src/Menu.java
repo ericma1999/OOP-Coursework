@@ -77,6 +77,7 @@ public class Menu {
         for (int i = 0; i < contents.size(); i++) {
             System.out.println(contents.get(i));
         }
+        System.out.println();
     }
 
     private void handleFile(){

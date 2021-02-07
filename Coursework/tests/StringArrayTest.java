@@ -262,6 +262,16 @@ class StringArrayTest {
     }
 
     @Test
+    void testCombineEmpty(){
+        StringArray secondStringArray = new StringArray();
+
+        secondStringArray.uniqueCombine(testArray);
+
+        assertTrue(secondStringArray.contains("hello2"));
+        assertTrue(secondStringArray.contains("hello3"));
+    }
+
+    @Test
     void testCombineNull(){
         StringArray secondStringArray = new StringArray();
         secondStringArray.add(null);

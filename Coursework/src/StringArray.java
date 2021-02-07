@@ -64,7 +64,6 @@ public class StringArray {
             this.length += 1;
 
             performResizeIfNeeded();
-
         }
     }
 
@@ -119,8 +118,6 @@ public class StringArray {
             }
             String currentValue = matchingCase ? this.stringArray[i] : this.stringArray[i].toLowerCase();
             if (input.equals(currentValue)) return i;
-
-
         }
         return -1;
     }
