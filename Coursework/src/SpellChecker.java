@@ -22,7 +22,7 @@ public class SpellChecker {
 
     public String applyChanges(String word, String correctedWord){
 
-        String regex = String.format("\\b%s\\b", word);
+        String regex = String.format("\\b(?i)%s\\b", word);
         this.fixedString = this.fixedString.replaceAll(regex, correctedWord);
         return this.fixedString;
     }
