@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -26,6 +25,11 @@ class DictionaryTest {
     @Test
     void constructorTest(){
         assertTrue(newDictionary.contains("f"));
+    }
+
+    @Test
+    void search(){
+        assertEquals(1, newDictionary.indexOf("a"));
     }
 
 }
