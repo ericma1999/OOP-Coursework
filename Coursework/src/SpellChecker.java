@@ -45,4 +45,26 @@ public class SpellChecker {
         }
         return new Correction(excludedWord, suggestions);
     }
+
+    public StringArray getExcludedWords(String input){
+        return this.findWordsInString(input).getExcluded();
+    }
+
+    private Tuple findWordsInString(String input) {
+        StringArray included = new StringArray();
+        StringArray excluded = new StringArray();
+
+        for (String word : this.sanitiseString(input)) {
+            if (dictionary.contains(word) && !included.contains(word)) {
+                included.add(word);
+            } else if (!dictionary.contains(word) && !excluded.contains(word)) {
+                excluded.add(word);
+            }
+        }
+        return new Tuple(included, excluded);
+    }
+
+    private String[] sanitiseString(String input) {
+        return input.replaceAll("\\W", " ").toLowerCase().split("\\s+");
+    }
 }
