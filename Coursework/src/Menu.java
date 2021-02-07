@@ -151,7 +151,7 @@ public class Menu {
             this.showCurrentCorrection(correction);
             StringArray suggestions = correction.getSuggestions();
             try{
-                int option = Integer.parseInt(input.nextLine());
+                int option = Integer.parseInt(this.getInput("Please select an option"));
 
                 if (option == 0){
                     break;

@@ -1,6 +1,5 @@
 // gets a string and a dictionary and do correction on it
 // generate suggestions
-
 public class SpellChecker {
 
     private String fixedString;
@@ -23,6 +22,7 @@ public class SpellChecker {
     public String applyChanges(String word, String correctedWord){
 
         String regex = String.format("\\b(?i)%s\\b", word);
+
         this.fixedString = this.fixedString.replaceAll(regex, correctedWord);
         return this.fixedString;
     }
