@@ -78,7 +78,7 @@ public class Controller {
             String currentWord = excludedWords.get(i);
             Correction correction = spellChecker.generateSuggestions(currentWord);
             StringArray suggestions = correction.getSuggestions();
-            
+
             if (suggestions.size() == 0) {
                 view.handleNoSuggestions(currentWord);
             } else {

@@ -27,10 +27,6 @@ public class SpellChecker {
         return this.fixedString;
     }
 
-    public String fixedString(){
-        return this.fixedString;
-    }
-
     public Correction generateSuggestions(String excludedWord){
 
         StringArray suggestions = new StringArray();
