@@ -16,7 +16,7 @@ public class Dictionary extends StringArray{
         this.alphabetCount[getAlphabetIndex(word)] += 1;
     }
 
-    /*  get the offset of the alphabet*/
+    /*  get the offset of the alphabet */
     private int getAlphabetIndex(String word){
         return word.charAt(0) - 'a';
     }
