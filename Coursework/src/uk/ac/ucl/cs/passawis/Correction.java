@@ -1,3 +1,5 @@
+package uk.ac.ucl.cs.passawis;
+
 public class Correction {
     private String word;
     private StringArray suggestions;

@@ -1,5 +1,6 @@
-// gets a string and a dictionary and do correction on it
-// generate suggestions
+package uk.ac.ucl.cs.passawis;
+
+/* generate suggestions for the word received and apply corrections on the string */
 public class SpellChecker {
 
     private String fixedString;

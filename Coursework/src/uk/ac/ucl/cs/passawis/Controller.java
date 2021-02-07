@@ -1,3 +1,5 @@
+package uk.ac.ucl.cs.passawis;
+
 public class Controller {
 
     private final Dictionary dictionary;

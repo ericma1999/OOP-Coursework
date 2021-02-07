@@ -1,3 +1,5 @@
+package uk.ac.ucl.cs.passawis;
+
 import java.io.Closeable;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -31,15 +33,15 @@ public class Input implements Closeable, Iterator<String>
      * functionality.
      * <p/>
      * <p>This is protected and not final rather than private and final (as we might have
-     * expected it to be) so that <code>FileInput</code> can access the variable.  This is
-     * necessary because <code>FileInput</code> needs to capture all exceptions that can happen
+     * expected it to be) so that <code>main.FileInput</code> can access the variable.  This is
+     * necessary because <code>main.FileInput</code> needs to capture all exceptions that can happen
      * during construction, which means that the <code>super</code> constructor call cannot be
      * used.  This appears to be something of a misfeature of Java.</p>
      */
     protected Scanner scanner;
 
     /**
-     * The default constructor of an <code>Input</code> that assumes <code>System.in</code> is to
+     * The default constructor of an <code>main.Input</code> that assumes <code>System.in</code> is to
      * be the <code>InputStream</code> used.
      */
     public Input()
@@ -48,7 +50,7 @@ public class Input implements Closeable, Iterator<String>
     }
 
     /**
-     * Constructor of an <code>Input</code> object given an <code>InputStream</code> object.
+     * Constructor of an <code>main.Input</code> object given an <code>InputStream</code> object.
      */
     public Input(final InputStream in)
     {
@@ -56,7 +58,7 @@ public class Input implements Closeable, Iterator<String>
     }
 
     /**
-     * A finalizer to ensure all files are closed if an <code>Input</code> object is garbage
+     * A finalizer to ensure all files are closed if an <code>main.Input</code> object is garbage
      * collected.
      */
     public void finalize()
@@ -551,7 +553,7 @@ public class Input implements Closeable, Iterator<String>
      */
     private void illegalStateExceptionHandler()
     {
-        System.err.println("Input has been closed.");
+        System.err.println("main.Input has been closed.");
         System.exit(1);
     }
 
@@ -560,7 +562,7 @@ public class Input implements Closeable, Iterator<String>
      */
     private void inputMismatchExceptionHandler(final String type)
     {
-        System.err.println("Input did not represent " +
+        System.err.println("main.Input did not represent " +
                 (type.equals("int") ? "an" : "a") + " " + type + " value.");
         System.exit(1);
     }

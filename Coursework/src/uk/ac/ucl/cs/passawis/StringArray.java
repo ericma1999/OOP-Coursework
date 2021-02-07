@@ -1,3 +1,5 @@
+package uk.ac.ucl.cs.passawis;
+
 public class StringArray {
 
     private String[] stringArray;

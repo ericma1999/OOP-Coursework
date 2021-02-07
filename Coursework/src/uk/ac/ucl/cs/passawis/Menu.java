@@ -1,3 +1,5 @@
+package uk.ac.ucl.cs.passawis;
+
 public class Menu {
 
     private Controller controller;

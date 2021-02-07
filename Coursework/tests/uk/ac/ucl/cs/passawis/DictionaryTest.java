@@ -1,11 +1,12 @@
+package uk.ac.ucl.cs.passawis;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DictionaryTest {
-
-
+    
     private boolean setUpIsDone = false;
     Dictionary newDictionary;
 

@@ -1,3 +1,5 @@
+package uk.ac.ucl.cs.passawis;
+
 import java.io.BufferedWriter;
 import java.io.Closeable;
 import java.io.File;
@@ -32,7 +34,7 @@ public class FileOutput implements Closeable, Flushable
     protected final BufferedWriter writer;
 
     /**
-     * Constructor of a <code>FileOutput</code> object given a file name string.
+     * Constructor of a <code>main.FileOutput</code> object given a file name string.
      * Setting append to true will open the file in append mode.
      */
     public FileOutput(final String filename, boolean append)
@@ -56,7 +58,7 @@ public class FileOutput implements Closeable, Flushable
     }
 
     /**
-     * Constructor of a <code>FileOutput</code> object given a <code>File</code> object.
+     * Constructor of a <code>main.FileOutput</code> object given a <code>File</code> object.
      * Setting append to true will open the file in append mode.
      */
     public FileOutput(final File file, boolean append)
@@ -65,7 +67,7 @@ public class FileOutput implements Closeable, Flushable
     }
 
     /**
-     * Constructor of a <code>FileOutput</code> object given a file name string.
+     * Constructor of a <code>main.FileOutput</code> object given a file name string.
      * If the file already exists its existing contents will be overwritten.
      */
     public FileOutput(final String filename)
@@ -74,7 +76,7 @@ public class FileOutput implements Closeable, Flushable
     }
 
     /**
-     * Constructor of a <code>FileOutput</code> object given a <code>File</code> object.
+     * Constructor of a <code>main.FileOutput</code> object given a <code>File</code> object.
      * If the file already exists its existing contents will be overwritten.
      */
     public FileOutput(final File file)
@@ -83,7 +85,7 @@ public class FileOutput implements Closeable, Flushable
     }
 
     /**
-     * Finalizer to close the file in case the using code fails to and a <code>FileOutput</code>
+     * Finalizer to close the file in case the using code fails to and a <code>main.FileOutput</code>
      * object gets garbage collected.
      */
     public void finalize()

@@ -1,3 +1,5 @@
+package uk.ac.ucl.cs.passawis;
+
 public class Dictionary extends StringArray{
 
     /* Variable to keep track of number of words with same starting alphabet */

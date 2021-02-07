@@ -1,11 +1,13 @@
+package uk.ac.ucl.cs.passawis;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
  * An iterator type class to read values from a text file.  This is a subclass of
- * <code>Input</code> that hides the exceptions that can happen when opening a file.  As with
- * <code>Input</code> all errors during use of the iterator result in a message output to the
+ * <code>main.Input</code> that hides the exceptions that can happen when opening a file.  As with
+ * <code>main.Input</code> all errors during use of the iterator result in a message output to the
  * standard error and program termination.
  * <p/>
  * <p>This class is useful for people new to Java since it allows them to write programs using
@@ -20,7 +22,7 @@ import java.util.Scanner;
 public class FileInput extends Input
 {
     /**
-     * Construct <code>FileInput</code> object given a file name.
+     * Construct <code>main.FileInput</code> object given a file name.
      */
     public FileInput(final String fileName)
     {
@@ -36,7 +38,7 @@ public class FileInput extends Input
     }
 
     /**
-     * Construct <code>FileInput</code> object given a file name.
+     * Construct <code>main.FileInput</code> object given a file name.
      */
     public FileInput(final FileInputStream fileStream)
     {
