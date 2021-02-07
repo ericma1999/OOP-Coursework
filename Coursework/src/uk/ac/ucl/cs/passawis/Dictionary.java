@@ -4,8 +4,8 @@ public class Dictionary{
 
     private StringArray words = new StringArray();
 
+    /* Could be implemented with a hashmap if allowed, hashmap mapping to StringArray for each starting alphabet to speed up search */
     /* Variable to keep track of number of words with same starting alphabet */
-    /* Could be implemented with a hashmap mapping to string array for each starting alphabet to speed up search */
     private final int[] alphabetCount = new int[26];
 
     public String get(int index){
