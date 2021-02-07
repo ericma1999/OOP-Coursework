@@ -59,14 +59,4 @@ public class Dictionary extends StringArray{
         }
         return -1;
     }
-
-    /* dictionary file will be in correct order for this program */
-    private void readFileContents(String source){
-        FileInput file = new FileInput(source);
-        while(file.hasNextLine()){
-            this.add(file.nextLine().toLowerCase());
-        }
-        file.close();
-    }
-
 }

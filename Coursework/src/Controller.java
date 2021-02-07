@@ -22,7 +22,7 @@ public class Controller {
     }
 
     public StringArray getExcludedWordsFromFile(String filename) {
-        return findWordsInFile(filename).getExcluded();
+        return this.findWordsInFile(filename).getExcluded();
     }
 
     private Tuple findWordsInFile(String fileName) {
