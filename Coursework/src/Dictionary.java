@@ -20,7 +20,7 @@ public class Dictionary extends StringArray{
     }
 
     /*  tally up the count for each of the word starting with same alphabet */
-    public int getSearchStartPos(int alphabetIndex){
+    private int getSearchStartPos(int alphabetIndex){
         if (alphabetIndex == 0){
             return 0;
         }else{
@@ -28,7 +28,7 @@ public class Dictionary extends StringArray{
         }
     }
 
-    public int getIndexEndForStartingChar(int alphabetIndex){
+    private int getIndexEndForStartingChar(int alphabetIndex){
         return this.getSearchStartPos(alphabetIndex) + this.alphabetCount[alphabetIndex] - 1;
     }
 
