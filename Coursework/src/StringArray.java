@@ -74,18 +74,9 @@ public class StringArray {
         if (index == this.length - 1){
             this.stringArray = new String[initialSize];
             this.length = 0;
-        }else if (index == 0){
-            String[] newArray = new String [this.stringArray.length];
-            System.arraycopy(this.stringArray, 1, newArray, 0, this.length - 1);
+        }else{
+            System.arraycopy(this.stringArray, index + 1, this.stringArray, index, this.length - 1);
             this.length -= 1;
-            this.stringArray = newArray;
-        }
-        else {
-            String[] newArray = new String [this.stringArray.length];
-            System.arraycopy(this.stringArray, 0, newArray, 0, index);
-            System.arraycopy(this.stringArray, index + 1, newArray, index, this.length - (index + 1));
-            this.length -= 1;
-            this.stringArray = newArray;
         }
 
         performResizeIfNeeded();
