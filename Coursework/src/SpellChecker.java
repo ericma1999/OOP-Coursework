@@ -1,22 +1,15 @@
+// gets a string and a dictionary and do correction on it
+// generate suggestions
+
 public class SpellChecker {
 
     private String fixedString;
     private Dictionary dictionary;
     private final int tolerance;
-    private Correction[] corrections;
 
     public SpellChecker(Dictionary dictionary, int tolerance){
         this.dictionary = dictionary;
         this.tolerance = tolerance;
-    }
-    public Correction findCorrection(String word){
-        for(Correction correction: corrections){
-            if (correction.getWord().equals(word)){
-                return correction;
-            }
-        }
-
-        return null;
     }
 
     public void setText(String text){
@@ -51,9 +44,5 @@ public class SpellChecker {
             }
         }
         return new Correction(excludedWord, suggestions);
-    }
-
-    public Correction[] getCorrections(){
-        return this.corrections;
     }
 }
