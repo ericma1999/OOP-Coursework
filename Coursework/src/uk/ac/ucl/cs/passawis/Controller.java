@@ -94,13 +94,13 @@ public class Controller {
     }
 
     public void writeToFile(String fileName) {
-        FileOutput out = new FileOutput(fileName + ".txt");
+        FileOutput out = new FileOutput(fileName);
         out.writeString(spellChecker.getFixedString());
         out.close();
     }
 
     public void writeContentToFile(String fileName, StringArray contents) {
-        FileOutput output = new FileOutput(fileName + ".txt");
+        FileOutput output = new FileOutput(fileName);
 
         for (int i = 0; i < contents.size(); i++) {
             output.writeString(contents.get(i));
