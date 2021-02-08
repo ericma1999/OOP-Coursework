@@ -32,11 +32,12 @@ public class SpellChecker {
     public Correction generateSuggestions(String excludedWord){
 
         StringArray suggestions = new StringArray();
-
         for (int i = 0; i < dictionary.size(); i++) {
             String currentDictionaryWord = dictionary.get(i);
-            if (currentDictionaryWord.contains(excludedWord.toLowerCase()) &&
-                    currentDictionaryWord.length() < excludedWord.length() + this.tolerance){
+            double jaroWinklerScore = JaroWinkler.calculateJaroWinkler(excludedWord, currentDictionaryWord);
+
+            if ((currentDictionaryWord.contains(excludedWord.toLowerCase()) &&
+                    currentDictionaryWord.length() < excludedWord.length() + this.tolerance || jaroWinklerScore >= 0.7)){
                 suggestions.add(currentDictionaryWord);
             }
         }
