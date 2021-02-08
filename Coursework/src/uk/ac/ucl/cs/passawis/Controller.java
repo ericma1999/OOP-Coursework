@@ -5,6 +5,7 @@ public class Controller {
     private final Dictionary dictionary;
     private final Menu view;
     private final SpellChecker spellChecker;
+    /* Opensource dictionary from http://www.gwicks.net/dictionaries.htm UK English-65000 words */
     private String dictionarySrc = "words.txt";
 
     public Controller(Menu view) {
