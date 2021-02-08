@@ -1,5 +1,7 @@
 package uk.ac.ucl.cs.passawis;
 
+/* Learnt from https://en.wikipedia.org/wiki/Jaro%E2%80%93Winkler_distance */
+/* Reference video used: https://youtu.be/9QgTUMJ1cpQ?t=247 */
 public class JaroWinkler {
 
     private static int samePrefix(String input, String correctWord){
@@ -48,9 +50,9 @@ public class JaroWinkler {
             int start = getStartIndex(i);
             int end = getEndIndex(i, dictionaryWord.length());
 
-            String spliced = dictionaryWord.substring(start,end);
+            String splicedString = dictionaryWord.substring(start,end);
 
-            int splicedResult = spliced.indexOf(input.charAt(i));
+            int splicedResult = splicedString.indexOf(input.charAt(i));
 
             if (splicedResult != -1){
                 matches += 1;
