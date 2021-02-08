@@ -53,6 +53,7 @@ public class SpellChecker {
         StringArray excluded = new StringArray();
 
         for (String word : this.sanitiseString(input)) {
+            if (this.isNumber(word)) continue;
             if (dictionary.contains(word) && !included.contains(word)) {
                 included.add(word);
             } else if (!dictionary.contains(word) && !excluded.contains(word)) {
@@ -60,6 +61,15 @@ public class SpellChecker {
             }
         }
         return new Tuple(included, excluded);
+    }
+
+    private boolean isNumber(String s){
+        try{
+            Integer.parseInt(s);
+        }catch(NumberFormatException e){
+            return false;
+        }
+        return true;
     }
 
     private String[] sanitiseString(String input) {
