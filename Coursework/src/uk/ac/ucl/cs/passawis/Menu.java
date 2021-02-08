@@ -97,12 +97,16 @@ public class Menu {
 
     private void handleText(){
         String text = this.getInput("Please input your text");
-        StringArray excludedWords = controller.getExcludedWordsFromString(text);
+        if (!text.isBlank()){
+            StringArray excludedWords = controller.getExcludedWordsFromString(text);
 
-        this.showExcludedWords(excludedWords);
+            this.showExcludedWords(excludedWords);
 
-        if (excludedWords.size() > 0) {
-            controller.handleCorrection(text, excludedWords);
+            if (excludedWords.size() > 0) {
+                controller.handleCorrection(text, excludedWords);
+            }
+        }else{
+            System.out.println("\nString was empty\n");
         }
     }
 

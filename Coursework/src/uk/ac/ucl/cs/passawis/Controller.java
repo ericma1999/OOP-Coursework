@@ -39,6 +39,9 @@ public class Controller {
 
         while (file.hasNextLine()){
             String line = file.nextLine();
+            if (line.isBlank()){
+                continue;
+            }
             excluded.uniqueCombine(spellChecker.getExcludedWords(line));
         }
         return excluded;
