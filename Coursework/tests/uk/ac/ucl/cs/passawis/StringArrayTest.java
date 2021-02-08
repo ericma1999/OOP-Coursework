@@ -19,9 +19,24 @@ class StringArrayTest {
     }
 
     @Test
+    void secondConstructor(){
+        StringArray testArray2 = new StringArray(testArray);
+
+        assertEquals(3, testArray2.size());
+    }
+
+
+    @Test
     void testAddandSize() {
         testArray.add("hello4");
         assertEquals(4, testArray.size());
+    }
+
+    @Test
+    void emptyStringArraySize(){
+        StringArray test2 = new StringArray();
+
+        assertEquals(0, test2.size());
     }
 
     @Test
@@ -46,8 +61,7 @@ class StringArrayTest {
     @Test
     void getWrongIndex() {
         assertNull(testArray.get(-1));
-        assertNull( testArray.get(3));
-
+        assertNull(testArray.get(3));
     }
 
     @Test
@@ -79,6 +93,16 @@ class StringArrayTest {
         testArray.insert(1, "insert middle");
         assertEquals("insert middle", testArray.get(1));
         assertEquals("hello2", testArray.get(2));
+        assertEquals(4, testArray.size());
+    }
+
+    @Test
+    void insertAtStart(){
+        testArray.insert(0, "insert at start");
+
+        assertEquals("insert at start", testArray.get(0));
+        assertEquals("hello",testArray.get(1));
+        assertEquals(4, testArray.size());
     }
 
     @Test
@@ -98,6 +122,10 @@ class StringArrayTest {
         testArray.insert(0, "hello");
         assertEquals(1, testArray.size());
         assertEquals("hello",testArray.get(0));
+    }
+
+    @Test
+    void insertWhenEmptyWrongIndex(){
 
         testArray = new StringArray();
 
@@ -117,9 +145,7 @@ class StringArrayTest {
         testArray = new StringArray();
         testArray.add("hello");
 
-        System.out.println(testArray.size());
         testArray.remove(0);
-        System.out.println(testArray.size());
 
         assertTrue(testArray.isEmpty());
     }
@@ -147,7 +173,7 @@ class StringArrayTest {
 
     @Test
     void testContains(){
-        assertTrue(testArray.contains("hello"));
+        assertTrue(testArray.contains("HELLO"));
         assertFalse(testArray.contains("hello999"));
     }
 
@@ -174,53 +200,6 @@ class StringArrayTest {
     void indexOfMatchingCase(){
         assertEquals(0, testArray.indexOfMatchingCase("hello"));
         assertEquals(-1, testArray.indexOfMatchingCase("HELLO"));
-    }
-
-    @Test
-    void testArrayResizing(){
-        StringArray test = new StringArray();
-
-        for (int i = 0; i < 100; i++) {
-            test.add("hello".concat(String.valueOf(i)));
-        }
-
-        assertEquals(100, test.size());
-
-        test.add("another");
-
-        assertEquals(101, test.size());
-    }
-
-    @Test
-    void testArrayResizingReduction(){
-        StringArray test = new StringArray();
-
-        for (int i = 0; i < 101; i++) {
-            test.add("hello".concat(String.valueOf(i)));
-        }
-
-        assertEquals(101, test.size());
-    }
-
-    @Test
-    void testArrayResizingReduction2(){
-        StringArray test = new StringArray();
-
-        for (int i = 0; i < 151; i++) {
-            test.add("hello".concat(String.valueOf(i)));
-        }
-
-        for (int i = 0; i < 50; i++) {
-            test.remove(0);
-        }
-
-    }
-    @Test
-    void secondConstructor(){
-        StringArray testArray2 = new StringArray(testArray);
-
-        assertEquals(3, testArray2.size());
-
     }
 
     @Test
@@ -263,6 +242,37 @@ class StringArrayTest {
         testArray.uniqueCombine(secondStringArray);
         assertEquals(4, testArray.size());
         testArray.contains(null);
+    }
+
+
+
+    @Test
+    void testArrayResizing(){
+        StringArray test = new StringArray();
+
+        for (int i = 0; i < 100; i++) {
+            test.add("hello".concat(String.valueOf(i)));
+        }
+
+        assertEquals(100, test.size());
+
+        test.add("another");
+
+        assertEquals(101, test.size());
+    }
+    
+    @Test
+    void testArrayResizingReduction(){
+        StringArray test = new StringArray();
+
+        for (int i = 0; i < 151; i++) {
+            test.add("hello".concat(String.valueOf(i)));
+        }
+
+        for (int i = 0; i < 50; i++) {
+            test.remove(0);
+        }
+
     }
 
 }
