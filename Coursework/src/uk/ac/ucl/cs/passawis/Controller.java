@@ -62,6 +62,9 @@ public class Controller {
 
         while (file.hasNextLine()) {
             String currentText = file.nextLine();
+
+            if (currentText.isBlank()) continue;
+
             StringArray excludedWords = this.getExcludedWordsFromString(currentText);
             if (this.handleSingleLineCorrection(currentText, excludedWords)){
                 suggestionAvailable = true;
