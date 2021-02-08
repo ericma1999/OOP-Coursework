@@ -36,8 +36,8 @@ public class SpellChecker {
             String currentDictionaryWord = dictionary.get(i);
             double jaroWinklerScore = JaroWinkler.calculateJaroWinkler(excludedWord, currentDictionaryWord);
 
-            if ((currentDictionaryWord.contains(excludedWord.toLowerCase()) &&
-                    currentDictionaryWord.length() < excludedWord.length() + this.tolerance || jaroWinklerScore >= 0.7)){
+            if ((currentDictionaryWord.contains(excludedWord.toLowerCase()) || jaroWinklerScore >= 0.7) &&
+                    currentDictionaryWord.length() < excludedWord.length() + this.tolerance){
                 suggestions.add(currentDictionaryWord);
             }
         }
