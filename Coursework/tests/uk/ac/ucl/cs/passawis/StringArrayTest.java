@@ -260,7 +260,7 @@ class StringArrayTest {
 
         assertEquals(101, test.size());
     }
-    
+
     @Test
     void testArrayResizingReduction(){
         StringArray test = new StringArray();

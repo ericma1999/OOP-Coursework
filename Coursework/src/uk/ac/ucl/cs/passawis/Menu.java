@@ -37,7 +37,7 @@ public class Menu {
         while(true){
 
             this.displayMenu();
-            String userInput = getInput("Please selection an option");
+            String userInput = getInput("Please select an option");
             int option;
 
             try{
@@ -85,7 +85,7 @@ public class Menu {
     }
 
     private void handleFile(){
-        String fileName = this.getInput("Please input your filename");
+        String fileName = this.getInput("Please input your filename with extension");
         StringArray excludedWords = controller.getExcludedWordsFromFile(fileName);
 
         this.showExcludedWords(excludedWords);

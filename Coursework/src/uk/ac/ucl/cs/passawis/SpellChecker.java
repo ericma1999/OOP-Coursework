@@ -62,6 +62,7 @@ public class SpellChecker {
     }
 
     private String[] sanitiseString(String input) {
-        return input.replaceAll("\\W", " ").toLowerCase().split("\\s+");
+        /* Regex to replace everything that is not a word character with space, except ' to allow for conjunctions such as couldn't */
+        return input.replaceAll("[\\W&&[^']]+", " ").toLowerCase().split("\\s+");
     }
 }

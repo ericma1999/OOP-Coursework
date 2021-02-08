@@ -5,7 +5,7 @@ public class Controller {
     private final Dictionary dictionary;
     private final Menu view;
     private final SpellChecker spellChecker;
-    private String dictionarySrc = "words";
+    private String dictionarySrc = "words.txt";
 
     public Controller(Menu view) {
         this.dictionary = new Dictionary();
