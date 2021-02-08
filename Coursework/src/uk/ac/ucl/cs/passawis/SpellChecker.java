@@ -5,6 +5,7 @@ public class SpellChecker {
 
     private String fixedString;
     private Dictionary dictionary;
+    /* tolerance is the maximum suggestion word's length from current incorrect word that is acceptable */
     private final int tolerance;
 
     public SpellChecker(Dictionary dictionary, int tolerance){
@@ -34,7 +35,6 @@ public class SpellChecker {
 
         for (int i = 0; i < dictionary.size(); i++) {
             String currentDictionaryWord = dictionary.get(i);
-
             if (currentDictionaryWord.contains(excludedWord.toLowerCase()) &&
                     currentDictionaryWord.length() < excludedWord.length() + this.tolerance){
                 suggestions.add(currentDictionaryWord);

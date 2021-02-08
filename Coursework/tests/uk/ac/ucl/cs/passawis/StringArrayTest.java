@@ -200,14 +200,6 @@ class StringArrayTest {
         }
 
         assertEquals(101, test.size());
-
-        test.actualSize();
-
-        for (int i = 0; i < 50; i++) {
-            test.remove(0);
-        }
-
-        test.actualSize();
     }
 
     @Test
@@ -218,15 +210,10 @@ class StringArrayTest {
             test.add("hello".concat(String.valueOf(i)));
         }
 
-//        assertEquals(101, test.size());
-
-        test.actualSize();
-
         for (int i = 0; i < 50; i++) {
             test.remove(0);
         }
 
-        test.actualSize();
     }
     @Test
     void secondConstructor(){
@@ -242,8 +229,6 @@ class StringArrayTest {
 
         testArray.uniqueCombine(secondStringArray);
         assertEquals(3, testArray.size());
-
-        testArray.print();
     }
 
     @Test
@@ -257,7 +242,6 @@ class StringArrayTest {
 
         assertTrue(testArray.contains("teehee"));
         assertEquals(4, testArray.size());
-        testArray.print();
 
     }
 

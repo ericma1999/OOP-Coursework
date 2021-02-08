@@ -22,8 +22,8 @@ public class Controller {
     /* dictionary file will be in correct order for this program */
     private void readDictionarySrc(String source){
         FileInput file = new FileInput(source);
-        while(file.hasNextLine()){
-            this.dictionary.add(file.nextLine().toLowerCase());
+        while(file.hasNext()){
+            this.dictionary.add(file.next().toLowerCase());
         }
         file.close();
     }

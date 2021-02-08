@@ -150,14 +150,4 @@ public class StringArray {
             }
         }
     }
-
-    public void print(){
-        for (int i = 0; i < this.length; i++) {
-            System.out.println(this.stringArray[i]);
-        }
-    }
-//
-    public void actualSize(){
-        System.out.println(this.stringArray.length);
-    }
 }
